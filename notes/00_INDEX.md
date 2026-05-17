@@ -17,10 +17,10 @@
 | 13 | [day_13_sets.md](day_13_sets.md) | Set: add/update, discard (silent) vs remove (KeyError), clear; Set ops: union(\|), intersection(&), difference(-), symmetric_difference(^); Dict: d[key] vs d.get(), keys must be immutable, add/update, del, copy, items/keys/values, pop/popitem, membership on keys only |
 | 14 | [day_14_bytes_frozenset.md](day_14_bytes_frozenset.md) | bytes (immutable, 0–255, from list), bytearray (mutable, 0–255), frozenset (immutable set); Functions intro: reusability, avoid repetition, def keyword, built-in vs user-defined, parameters, return vs print inside function |
 | 15 | [day_15_functions_basics.md](day_15_functions_basics.md) | Return multiple values (tuple, but one function one task is better), local variables (inside function only), global variables (outside, all functions), global keyword (to modify global from inside), name conflict: local wins, globals() to access global when names clash |
-| 16 | [day_16_scope_arguments.md](day_16_scope_arguments.md) | — |
-| 17 | [day_17_special_arguments.md](day_17_special_arguments.md) | — |
-| 18 | [day_18_lambda_nested_functions.md](day_18_lambda_nested_functions.md) | — |
-| 19 | [day_19_modules.md](day_19_modules.md) | — |
-| 20 | [day_20_builtin_modules.md](day_20_builtin_modules.md) | — |
+| 16 | [day_16_arguments.md](day_16_arguments.md) | Formal vs actual args; 4 argument types: positional (order+count must match), keyword (by name, any order), default (non-default must come first), *args (tuple), **kwargs (dict) |
+| 17 | [day_17_special_functions.md](day_17_special_functions.md) | Positional-only `/`, keyword-only `*`; function aliasing (`f2=f1`, same `id()`); nested functions (inner local to outer); recursion (base case required); `math` module (sqrt/factorial/ceil/floor/pow) |
+| 18 | [day_18_lambda.md](day_18_lambda.md) | Lambda `lambda args: expr` — nameless, no return keyword; filter() → subset; map() → same-size transform; reduce() from functools → single value; lambda replaces separate def for one-line functions |
+| 19 | [day_19_modules.md](day_19_modules.md) | Module = `.py` file; 5 import styles (import, as alias, from *, from member, from member as alias); name conflict with `import *`; `__name__ == "__main__"` guard; `help(module)` |
+| 20 | [day_20_builtin_modules.md](day_20_builtin_modules.md) | math (sqrt/factorial/ceil/floor/pow); datetime (.now(), strftime format codes); calendar (month/isleap/leapdays); random (random/randint/uniform/randrange/choice); array (1D, built-in) vs NumPy (1D+2D, install separately) |
 | 21 | [day_21_arrays_numpy.md](day_21_arrays_numpy.md) | — |
 | 22 | [day_22_oop_intro.md](day_22_oop_intro.md) | — |
