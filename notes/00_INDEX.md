@@ -22,5 +22,8 @@
 | 18 | [day_18_lambda.md](day_18_lambda.md) | Lambda `lambda args: expr` — nameless, no return keyword; filter() → subset; map() → same-size transform; reduce() from functools → single value; lambda replaces separate def for one-line functions |
 | 19 | [day_19_modules.md](day_19_modules.md) | Module = `.py` file; 5 import styles (import, as alias, from *, from member, from member as alias); name conflict with `import *`; `__name__ == "__main__"` guard; `help(module)` |
 | 20 | [day_20_builtin_modules.md](day_20_builtin_modules.md) | math (sqrt/factorial/ceil/floor/pow); datetime (.now(), strftime format codes); calendar (month/isleap/leapdays); random (random/randint/uniform/randrange/choice); array (1D, built-in) vs NumPy (1D+2D, install separately) |
-| 21 | [day_21_arrays_numpy.md](day_21_arrays_numpy.md) | — |
-| 22 | [day_22_oop_intro.md](day_22_oop_intro.md) | — |
+| 21 | [day_21_arrays_numpy.md](day_21_arrays_numpy.md) | `array` module (1D, type codes, insert/remove/reverse); NumPy (install, `np.array`, dtype/size/ndim/shape, linspace/arange/zeros/ones, 2D arrays, axis=0/1, flatten) |
+| 22 | [day_22_oop_intro.md](day_22_oop_intro.md) | OOP intro: benefits (security/reusability/enhancement); 4 pillars (encapsulation, abstraction, polymorphism, inheritance); class, object, `__init__` constructor, `self`, basic program structure |
+| 23 | [day_23_oop_constructor_method.md](day_23_oop_constructor_method.md) | Constructor vs method deep-dive; 4 program structures (constructor+method, only constructor, `__dict__`, only methods); print formatting styles (comma, \n, `.format()`, f-string) |
+| 24 | [day_24_types_of_variables.md](day_24_types_of_variables.md) | 3 variable types: instance (object-level, separate copy per object), static (class-level, shared), local (method-level, temporary); declaration/access/deletion rules; separate copy isolation demo |
+| 25 | [day_25_types_of_methods.md](day_25_types_of_methods.md) | 3 method types: instance (`self`, uses instance vars), class (`@classmethod`, `cls`, uses static vars), static (`@staticmethod`, no self/cls, utility); decorator concept; recognition guide |
