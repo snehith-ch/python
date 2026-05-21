@@ -1,0 +1,212 @@
+# ============================================================
+# PRACTICE — Day 33: File Handling Basics
+# ============================================================
+# Instructions:
+#   - Predict the output BEFORE running each code block
+#   - Write your prediction as a comment, then run to verify
+# ============================================================
+
+
+# --------------------------------------------------
+# SECTION 1: File Modes and Properties
+# --------------------------------------------------
+
+# Q1. Predict the file object properties:
+
+f = open("test_q1.txt", "w")
+
+print(f.name)       # prediction:
+print(f.mode)       # prediction:
+print(f.writable()) # prediction:
+print(f.readable()) # prediction:
+print(f.closed)     # prediction (file is open):
+
+f.close()
+print(f.closed)     # prediction (after close):
+
+
+# Q2. Predict — mode 'r' on non-existent file:
+
+# f = open("no_such_file.txt", "r")    # uncomment → prediction (error?):
+
+
+# Q3. File modes comparison — fill in the blanks:
+# Mode | Read | Write | Truncate | Create | Position
+# 'r'  |  ?   |   ?   |    ?     |   ?    | beginning
+# 'w'  |  ?   |   ?   |    ?     |   ?    | beginning
+# 'a'  |  ?   |   ?   |    ?     |   ?    | end
+# 'x'  |  ?   |   ?   |    ?     |   ?    | beginning
+
+# YOUR ANSWERS:
+
+
+# --------------------------------------------------
+# SECTION 2: Writing to Files
+# --------------------------------------------------
+
+# Q4. write() vs writelines() — predict what appears in the file:
+
+with open("test_q4.txt", "w") as f:
+    f.write("Line 1\n")
+    f.write("Line 2\n")
+    f.write("Line 3\n")
+
+# After this runs, open test_q4.txt — prediction (content):
+
+
+# Q5. writelines() — predict the file content:
+
+with open("test_q5.txt", "w") as f:
+    lines = ["Apple\n", "Banana\n", "Cherry\n"]
+    f.writelines(lines)    # no separator added — lines must include \n
+
+# prediction (content of file):
+
+
+# Q6. append mode — predict:
+
+with open("test_q6.txt", "w") as f:
+    f.write("Original content\n")
+
+with open("test_q6.txt", "a") as f:
+    f.write("Appended line\n")
+
+with open("test_q6.txt", "r") as f:
+    print(f.read())    # prediction:
+
+
+# Q7. 'w' mode truncates — predict:
+
+with open("test_q7.txt", "w") as f:
+    f.write("First write\n")
+
+with open("test_q7.txt", "w") as f:    # 'w' truncates existing content!
+    f.write("Second write\n")
+
+with open("test_q7.txt", "r") as f:
+    print(f.read())    # prediction (first or second write?):
+
+
+# --------------------------------------------------
+# SECTION 3: Reading from Files
+# --------------------------------------------------
+
+# Q8. Set up a file, then predict each read:
+
+with open("test_q8.txt", "w") as f:
+    f.write("Line A\nLine B\nLine C\n")
+
+# read() — reads everything
+with open("test_q8.txt", "r") as f:
+    content = f.read()
+    print(repr(content))    # prediction (with \n visible):
+
+# readline() — reads one line at a time
+with open("test_q8.txt", "r") as f:
+    print(repr(f.readline()))   # prediction:
+    print(repr(f.readline()))   # prediction:
+
+# readlines() — reads all lines into a list
+with open("test_q8.txt", "r") as f:
+    lines = f.readlines()
+    print(lines)     # prediction (list of strings):
+    print(len(lines))    # prediction:
+
+
+# Q9. Iterating over file lines — predict:
+
+with open("test_q8.txt", "r") as f:
+    for line in f:
+        print(line.strip())    # prediction (3 lines, .strip() removes \n):
+
+
+# --------------------------------------------------
+# SECTION 4: with Statement
+# --------------------------------------------------
+
+# Q10. with statement auto-closes — predict:
+
+with open("test_q10.txt", "w") as f:
+    f.write("Auto-close test")
+    print(f.closed)    # prediction (inside with):
+
+print(f.closed)        # prediction (outside with):
+
+
+# --------------------------------------------------
+# SECTION 5: Write Code
+# --------------------------------------------------
+
+# Q11. Write a program that:
+#   a) Creates a file "fruits.txt" with 5 fruits (one per line)
+#   b) Reads the file and prints each fruit in uppercase
+
+# YOUR CODE HERE:
+
+
+# Q12. Write a program that:
+#   a) Creates "log.txt" with "Session 1\n"
+#   b) Appends "Session 2\n" and "Session 3\n"
+#   c) Reads and prints all content
+
+# YOUR CODE HERE:
+
+
+# --------------------------------------------------
+# BONUS CHALLENGES
+# --------------------------------------------------
+
+# BONUS 1: Predict — what happens after close():
+
+f = open("bonus.txt", "w")
+f.write("data")
+f.close()
+# f.write("more")    # uncomment → prediction (error?):
+
+
+# BONUS 2: Predict — reading beyond EOF:
+
+with open("test_q8.txt", "r") as f:
+    print(repr(f.read()))         # prediction:
+    print(repr(f.read()))         # prediction (read again — EOF):
+    print(repr(f.readline()))     # prediction (at EOF):
+
+
+# BONUS 3:
+# Write a function word_count(filename) that:
+# - Opens the file
+# - Returns a dict with line_count, word_count, char_count
+# Test it on test_q8.txt (which has "Line A\nLine B\nLine C\n")
+
+# YOUR CODE HERE:
+
+
+# ============================================================
+# SOLUTIONS
+# ============================================================
+
+# Q1: "test_q1.txt", "w", True, False, False (open), True (after close)
+
+# Q2: FileNotFoundError: [Errno 2] No such file or directory
+
+# Q3: 'r': read=YES, write=NO, truncate=NO, create=NO
+#     'w': read=NO, write=YES, truncate=YES, create=YES
+#     'a': read=NO, write=YES, truncate=NO, create=YES
+#     'x': read=NO, write=YES, truncate=NO, create=YES (fails if exists)
+
+# Q4: File contains: "Line 1\nLine 2\nLine 3\n" (3 lines)
+
+# Q6: "Original content\nAppended line\n" (both lines)
+
+# Q7: "Second write\n" only (w mode erased first write)
+
+# Q8: 'Line A\nLine B\nLine C\n', 'Line A\n', 'Line B\n',
+#     ['Line A\n', 'Line B\n', 'Line C\n'], 3
+
+# Q9: Line A, Line B, Line C (each on its own line, \n stripped)
+
+# Q10: False (inside with — still open), True (outside with — auto-closed)
+
+# BONUS 1: ValueError: I/O operation on closed file
+
+# BONUS 2: 'Line A\nLine B\nLine C\n', '' (empty string at EOF), '' (at EOF)
