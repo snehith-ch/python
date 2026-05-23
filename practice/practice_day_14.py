@@ -116,13 +116,23 @@ fs = frozenset({1, 2, 3})
 #      (No parameters, no return value)
 
 # YOUR CODE HERE:
+def calling():
+    print("Hello, Python!")
 
+calling()
+calling()
+calling()
 
 # Q12. Write a function greet(name) that prints "Hello, [name]!"
 #      Call it with: "Snehith", "Alice", "World"
 
 # YOUR CODE HERE:
+def greet(name):
+    print("Hello, " + name + "!")
 
+greet("Snehith")
+greet("Alice")
+greet("World")
 
 # Q13. Predict the output — trace function execution:
 
@@ -135,14 +145,22 @@ show(True)
 show([1, 2, 3])
 
 # Prediction (4 lines):
-
+''' Value is: 10
+    Value is: Python
+    Value is: True
+    Value is: [1, 2, 3] '''
 
 # Q14. Function with two parameters — write and call:
 #      add(a, b): prints the sum of a and b
 #      Call with: (10, 20), (3.5, 1.5), (100, -50)
 
 # YOUR CODE HERE:
+def add(a, b):
+    print(a+b)
 
+add(10, 20)
+add(3.5, 1.5)
+add(100, -50)
 
 # Q15. return vs print — predict the difference:
 
@@ -156,8 +174,8 @@ def add_return(a, b):
 r1 = add_print(10, 20)
 r2 = add_return(10, 20)
 
-# print(r1)   # prediction:
-# print(r2)   # prediction:
+# print(r1)   # prediction: it will print 30 then we cant use it for further computation
+# print(r2)   # prediction: it will print 30 and we can use it for further computation
 
 
 # Q16. Using return value in further computation:
@@ -170,9 +188,9 @@ def cube(n):
 
 s = square(5)
 c = cube(3)
-print("Square of 5:", s)    # prediction:
-print("Cube of 3:", c)      # prediction:
-print("Total:", s + c)      # prediction:
+print("Square of 5:", s)    # prediction: we get 25 and we can use it for further computation
+print("Cube of 3:", c)      # prediction: we get 27 and we can use it for further computation
+print("Total:", s + c)      # prediction: we get 52 and we can use it for further computation and in this we used the results of both square and cube functions for further computation
 
 
 # Q17. Write a function is_even(n) that:
@@ -180,7 +198,16 @@ print("Total:", s + c)      # prediction:
 #      Test with: 4, 7, 0, 13
 
 # YOUR CODE HERE:
+def is_even(n):
+    if n%2 == 0:
+        return True
+    else:
+        return False 
 
+print(is_even(4))   # prediction: True
+print(is_even(7))   # prediction: False
+print(is_even(0))   # prediction: True
+print(is_even(13))  # prediction: False
 
 # --------------------------------------------------
 # BONUS CHALLENGES
