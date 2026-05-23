@@ -235,6 +235,91 @@ result2 = pd.concat([df1, df2], ignore_index=True)
 print(result2.index.tolist())   # prediction:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which function reads a CSV into a pandas DataFrame?
+#    A) pd.read_csv()    B) pd.load_csv()    C) pd.open_csv()    D) pd.csv()
+# Answer: ___
+
+# Q_MCQ_2. df.describe()  shows:
+#    A) Column names only    B) Statistical summary (mean, std, min, max, etc.)
+#    C) Data types    D) First 5 rows
+# Answer: ___
+
+# Q_MCQ_3. df[df["Score"] > 75]  returns:
+#    A) The Score column    B) Rows where Score > 75
+#    C) A single value    D) Column names
+# Answer: ___
+
+# Q_MCQ_4. plt.show()  is used to:
+#    A) Save the plot to a file    B) Display the plot
+#    C) Clear the figure    D) Set the title
+# Answer: ___
+
+# Q_MCQ_5. df.groupby("Grade")["Score"].mean()  calculates:
+#    A) Mean score of the whole DataFrame
+#    B) Mean score per Grade group
+#    C) Total score per Grade group
+#    D) Count per Grade
+# Answer: ___
+
+# Q_MCQ_6. plt.bar(x, y)  creates:
+#    A) A line chart    B) A scatter plot    C) A bar chart    D) A histogram
+# Answer: ___
+
+# Q_MCQ_7. df.to_csv("output.csv", index=False)  — index=False means:
+#    A) Skip the first column    B) Don't write the row index to the file
+#    C) Only write the index    D) Write headers only
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import pandas as _______ is the conventional alias.
+
+# FIB_2. import matplotlib.pyplot as _______ is the conventional alias.
+
+# FIB_3. df._______(5)  shows the first 5 rows of the DataFrame.
+
+# FIB_4. df.info()  shows _______, _______, and memory usage.
+
+# FIB_5. df["col"].value_counts()  returns the _______ of each unique value.
+
+# FIB_6. plt._______(x, y, label="line1")  plots a line chart.
+
+# FIB_7. plt.savefig("chart.png")  saves the plot to _______ without displaying.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Monthly Sales Dashboard using pandas + matplotlib.
+#
+# Requirements:
+#   1. Create a DataFrame with 12 months of sales data:
+#      columns: Month, Sales, Target, Region
+#   2. Calculate: total sales, average sales, months above target
+#   3. Add a column "Achievement%" = Sales/Target * 100
+#   4. Plot a line chart: Sales vs Target over 12 months
+#   5. Plot a bar chart: Sales by Region (grouped)
+#   6. Save both plots as "sales_line.png" and "sales_bar.png"
+#   7. Export the final DataFrame to "sales_report.csv"
+#
+# Expected output:
+#   Total Sales: 1,245,000
+#   Average Monthly Sales: 103,750
+#   Months above target: 7
+#   Plots saved: sales_line.png, sales_bar.png
+#   Report exported: sales_report.csv
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -267,3 +352,55 @@ print(result2.index.tolist())   # prediction:
 # BONUS 1: df['A'] → Series; df[['A']] → DataFrame (extra brackets = DataFrame)
 
 # BONUS 2: [0, 1, 0, 1] (original indices preserved), [0, 1, 2, 3] (reset)
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: A   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: C   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: pd
+# FIB_2: plt
+# FIB_3: head
+# FIB_4: column names, data types (dtypes)
+# FIB_5: frequency / count
+# FIB_6: plot  (or plt.plot)
+# FIB_7: a file (disk)
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import pandas as pd
+# import matplotlib
+# matplotlib.use("Agg")  # non-interactive backend
+# import matplotlib.pyplot as plt
+#
+# data = {
+#     "Month": ["Jan","Feb","Mar","Apr","May","Jun",
+#               "Jul","Aug","Sep","Oct","Nov","Dec"],
+#     "Sales": [90000,105000,98000,112000,115000,108000,
+#               95000,102000,118000,110000,97000,95000],
+#     "Target":[100000]*12,
+#     "Region":["North","South","East","West","North","South",
+#               "East","West","North","South","East","West"],
+# }
+# df = pd.DataFrame(data)
+# df["Achievement%"] = (df["Sales"] / df["Target"] * 100).round(1)
+#
+# print(f"Total Sales: {df['Sales'].sum():,}")
+# print(f"Average Monthly Sales: {df['Sales'].mean():,.0f}")
+# print(f"Months above target: {(df['Sales'] > df['Target']).sum()}")
+#
+# plt.figure(figsize=(10,5))
+# plt.plot(df["Month"], df["Sales"], marker="o", label="Sales")
+# plt.plot(df["Month"], df["Target"], linestyle="--", label="Target")
+# plt.title("Monthly Sales vs Target"); plt.legend(); plt.tight_layout()
+# plt.savefig("sales_line.png"); plt.close()
+#
+# region_sales = df.groupby("Region")["Sales"].sum()
+# plt.figure(figsize=(6,4))
+# plt.bar(region_sales.index, region_sales.values, color="steelblue")
+# plt.title("Sales by Region"); plt.tight_layout()
+# plt.savefig("sales_bar.png"); plt.close()
+#
+# df.to_csv("sales_report.csv", index=False)
+# print("Plots saved: sales_line.png, sales_bar.png")
+# print("Report exported: sales_report.csv")
+

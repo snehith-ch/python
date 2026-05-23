@@ -237,6 +237,99 @@ print(s * 3)       # prediction:
 # YOUR ANSWERS:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. class C(A, B) — Python looks up a method in order:
+#    A) B → A → C    B) C → A → B    C) C → B → A    D) A → B → C
+# Answer: ___
+
+# Q_MCQ_2. Which dunder method overloads the  +  operator?
+#    A) __plus__    B) __add__    C) __sum__    D) __append__
+# Answer: ___
+
+# Q_MCQ_3. len(obj)  calls which method?
+#    A) __size__    B) __length__    C) __len__    D) obj.length()
+# Answer: ___
+
+# Q_MCQ_4. __str__(self)  is called when you use:
+#    A) repr(obj)    B) str(obj) or print(obj)    C) hash(obj)    D) id(obj)
+# Answer: ___
+
+# Q_MCQ_5. The diamond problem in multiple inheritance occurs when:
+#    A) Two classes have the same variable name
+#    B) A class inherits from two classes that share a common ancestor
+#    C) A class has more than 4 levels of inheritance
+#    D) super() is used in multiple inheritance
+# Answer: ___
+
+# Q_MCQ_6. v1 = Vector(1,2); v2 = Vector(3,4); v1 + v2  would call:
+#    A) v1.__plus__(v2)    B) v1.__add__(v2)    C) add(v1,v2)    D) Vector.add(v1,v2)
+# Answer: ___
+
+# Q_MCQ_7. __eq__(self, other)  overloads:
+#    A) >=    B) ==    C) !=    D) <=
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. MRO stands for _______ and determines method lookup order.
+
+# FIB_2. print(C.__mro__)  for class C(A,B) shows: C → _______ → _______ → object.
+
+# FIB_3. v1 * 3  calls v1._______(3).
+
+# FIB_4. __repr__  is meant for _______ representation; __str__ for _______ output.
+
+# FIB_5. a < b  calls a._______(b).
+
+# FIB_6. class C(A, B) — super() in C follows _______ order.
+
+# FIB_7. To overload  -  operator: define _______ method.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Smart Vector Class with full operator overloading.
+#
+# Requirements:
+#   Define  Vector  class:
+#   - __init__(x, y)
+#   - __add__(other): component-wise add → Vector(x1+x2, y1+y2)
+#   - __sub__(other): component-wise subtract
+#   - __mul__(scalar): Vector(x*scalar, y*scalar)
+#   - __eq__(other): True if x and y both equal
+#   - __str__: "Vector(x, y)"
+#   - __repr__: "Vector(x={x}, y={y})"
+#   - magnitude(): returns sqrt(x²+y²) using math.sqrt
+#   - __len__: returns int(magnitude())  [so len() works]
+#
+# Also create two mixin classes:
+#   Printable: has print_info() method that prints type + str(self)
+#   Comparable: has is_larger_than(other) → magnitude > other.magnitude
+#
+#   class SmartVector(Vector, Printable, Comparable): pass
+#
+# Demonstrate:
+#   v1 = SmartVector(3, 4); v2 = SmartVector(1, 2)
+#   1. v1 + v2, v1 - v2, v1 * 2
+#   2. v1 == SmartVector(3,4) → True
+#   3. len(v1) → 5
+#   4. v1.magnitude() → 5.0
+#   5. v1.print_info()
+#   6. v1.is_larger_than(v2)
+#   7. Print SmartVector.__mro__
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -263,3 +356,47 @@ print(s * 3)       # prediction:
 
 # BONUS 3: - → __sub__, * → __mul__, / → __truediv__,
 #          == → __eq__, < → __lt__, len() → __len__, str() → __str__
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: C   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: Method Resolution Order
+# FIB_2: A;  B
+# FIB_3: __mul__
+# FIB_4: developer/unambiguous;  user-friendly
+# FIB_5: __lt__
+# FIB_6: MRO (left-to-right)
+# FIB_7: __sub__
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import math
+# class Vector:
+#     def __init__(self, x, y): self.x, self.y = x, y
+#     def __add__(self, o): return Vector(self.x+o.x, self.y+o.y)
+#     def __sub__(self, o): return Vector(self.x-o.x, self.y-o.y)
+#     def __mul__(self, s): return Vector(self.x*s, self.y*s)
+#     def __eq__(self, o): return self.x==o.x and self.y==o.y
+#     def __str__(self): return f"Vector({self.x}, {self.y})"
+#     def __repr__(self): return f"Vector(x={self.x}, y={self.y})"
+#     def magnitude(self): return math.sqrt(self.x**2 + self.y**2)
+#     def __len__(self): return int(self.magnitude())
+#
+# class Printable:
+#     def print_info(self): print(f"[{type(self).__name__}] {str(self)}")
+#
+# class Comparable:
+#     def is_larger_than(self, other): return self.magnitude() > other.magnitude()
+#
+# class SmartVector(Vector, Printable, Comparable): pass
+#
+# v1, v2 = SmartVector(3,4), SmartVector(1,2)
+# print(v1+v2, v1-v2, v1*2)
+# print(f"v1==SmartVector(3,4): {v1==SmartVector(3,4)}")
+# print(f"len(v1)={len(v1)}  magnitude={v1.magnitude()}")
+# v1.print_info()
+# print(f"v1 larger than v2: {v1.is_larger_than(v2)}")
+# print("MRO:", [c.__name__ for c in SmartVector.__mro__])
+

@@ -238,6 +238,99 @@ f(1, 3, 5, x=9, y=11)
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What is the type of  *args  inside a function?
+#    A) list    B) tuple    C) set    D) dict
+# Answer: ___
+
+# Q_MCQ_2. What is the type of  **kwargs  inside a function?
+#    A) list    B) tuple    C) set    D) dict
+# Answer: ___
+
+# Q_MCQ_3. def f(a, b=10) — which of these is a VALID call?
+#    A) f()        B) f(1, 2, 3)    C) f(5)    D) f(b=5)
+# Answer: ___
+
+# Q_MCQ_4. Which argument type MUST come last in a function signature?
+#    A) Positional    B) Default    C) *args    D) **kwargs
+# Answer: ___
+
+# Q_MCQ_5. f(b=2, a=1)  uses which type of arguments?
+#    A) Positional    B) Keyword    C) Default    D) *args
+# Answer: ___
+
+# Q_MCQ_6. Can a positional argument appear AFTER a keyword argument in a call?
+#    A) Yes    B) No — SyntaxError    C) Only with *args    D) Only in Python 3.10+
+# Answer: ___
+
+# Q_MCQ_7. def total(*nums): return sum(nums) — calling total(1,2,3,4) returns:
+#    A) [1,2,3,4]    B) 10    C) (1,2,3,4)    D) Error
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. *args collects extra positional arguments into a _______.
+
+# FIB_2. **kwargs collects extra keyword arguments into a _______.
+
+# FIB_3. Default arguments must come _______ non-default arguments in def.
+
+# FIB_4. def f(a, b=5, *args, **kw): — calling f(1,2,3,x=9) →
+#         a=_______, b=_______, args=_______, kw=_______.
+
+# FIB_5. To unpack a list as positional args: f(*my_list) uses _______ unpacking.
+
+# FIB_6. To unpack a dict as keyword args: f(**my_dict) uses _______ unpacking.
+
+# FIB_7. def greet(name, greeting="Hello"): — greeting is a _______ argument.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Flexible Restaurant Order System.
+#
+# Requirements:
+#   1. def place_order(customer_name, *items, table=1, **extras):
+#      - customer_name: required positional
+#      - *items: list of ordered dishes (variable)
+#      - table: keyword with default=1
+#      - **extras: any extras (e.g., spicy=True, discount=10, note="...")
+#   2. Inside: calculate total (each item costs ₹150 for simplicity)
+#              apply discount if in extras
+#              add a service charge of 10%
+#   3. Print a formatted order receipt
+#   4. Call it 3 ways:
+#      a) place_order("Snehith", "Biryani", "Lassi")
+#      b) place_order("Priya", "Dosa", "Coffee", table=5, spicy=True)
+#      c) place_order("Raj", "Burger", "Fries", "Shake", table=3,
+#                     discount=15, note="Birthday treat")
+#
+# Expected output (call c):
+#   ========== ORDER RECEIPT ==========
+#   Customer : Raj          Table: 3
+#   Items    : Burger, Fries, Shake
+#   Subtotal : ₹ 450.00
+#   Discount : 15%  → -₹ 67.50
+#   After discount: ₹ 382.50
+#   Service (10%): ₹  38.25
+#   TOTAL    : ₹ 420.75
+#   Note     : Birthday treat
+#   ====================================
+#
+# Hint: for key, val in extras.items(): handle each extra separately.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -282,3 +375,43 @@ f(1, 3, 5, x=9, y=11)
 # 1 3 () {}
 # 1 3 (5, 7) {}
 # 1 3 (5,) {'x': 9, 'y': 11}
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: D   Q_MCQ_3: C   Q_MCQ_4: D
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: tuple
+# FIB_2: dict
+# FIB_3: after
+# FIB_4: 1;  2;  (3,);  {'x':9}
+# FIB_5: list/positional
+# FIB_6: dict/keyword
+# FIB_7: default
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# def place_order(customer_name, *items, table=1, **extras):
+#     price_each = 150
+#     subtotal   = len(items) * price_each
+#     discount   = extras.get("discount", 0)
+#     after_disc = subtotal * (1 - discount/100)
+#     service    = after_disc * 0.10
+#     total      = after_disc + service
+#     print("=" * 36)
+#     print(f"Customer : {customer_name:<12}  Table: {table}")
+#     print(f"Items    : {', '.join(items)}")
+#     print(f"Subtotal : ₹ {subtotal:>7.2f}")
+#     if discount:
+#         print(f"Discount : {discount}%  → -₹ {subtotal*discount/100:.2f}")
+#         print(f"After discount: ₹ {after_disc:.2f}")
+#     print(f"Service (10%): ₹ {service:>6.2f}")
+#     print(f"TOTAL    : ₹ {total:>7.2f}")
+#     if "note" in extras: print(f"Note     : {extras['note']}")
+#     if "spicy" in extras: print("🌶 Spicy order!")
+#     print("=" * 36)
+#
+# place_order("Snehith", "Biryani", "Lassi")
+# place_order("Priya", "Dosa", "Coffee", table=5, spicy=True)
+# place_order("Raj","Burger","Fries","Shake",table=3,discount=15,note="Birthday treat")
+

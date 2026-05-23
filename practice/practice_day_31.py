@@ -184,6 +184,102 @@ except ValueError as msg:
 # YOUR CODE HERE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which block runs ONLY when an exception occurs?
+#    A) try    B) except    C) else    D) finally
+# Answer: ___
+
+# Q_MCQ_2. What happens if you use a bare  except:  clause?
+#    A) Catches only ValueError
+#    B) Catches ALL exceptions including SystemExit
+#    C) Raises a SyntaxError
+#    D) Only catches user-defined exceptions
+# Answer: ___
+
+# Q_MCQ_3. What does  except (ValueError, TypeError):  do?
+#    A) Catches ValueError first, then TypeError separately
+#    B) Catches either ValueError or TypeError in one handler
+#    C) Raises both at once
+#    D) SyntaxError — cannot combine exceptions
+# Answer: ___
+
+# Q_MCQ_4. Which block executes REGARDLESS of whether an exception occurred?
+#    A) try    B) except    C) else    D) finally
+# Answer: ___
+
+# Q_MCQ_5. What is the output?
+#    try:
+#        x = int("abc")
+#    except ValueError as e:
+#        print("caught")
+#    else:
+#        print("no error")
+#    A) caught no error    B) no error    C) caught    D) nothing
+# Answer: ___
+
+# Q_MCQ_6. ZeroDivisionError is raised when:
+#    A) int("0")    B) 10 / 0    C) 10 // 1    D) 0 ** 0
+# Answer: ___
+
+# Q_MCQ_7. Which is NOT a built-in Python exception?
+#    A) ValueError    B) TypeError    C) KeyError    D) NullPointerError
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. The  _______  block contains code that might raise an exception.
+
+# FIB_2. To access the exception message use  except ExceptionType as _______:
+
+# FIB_3. int("hello")  raises a _______ exception.
+
+# FIB_4. my_list[99]  on a 3-element list raises _______.
+
+# FIB_5. The  _______  block runs only if no exception was raised in try.
+
+# FIB_6. my_dict["missing_key"]  raises _______.
+
+# FIB_7. To prevent crashes from bad user input, wrap  int(input(...))  in a
+#         _______ block.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Build a Robust Calculator that handles all common errors.
+#
+# Requirements:
+#   1. Ask the user for two numbers and an operator (+, -, *, /)
+#   2. Handle ValueError if non-numeric input is entered
+#   3. Handle ZeroDivisionError for division by zero
+#   4. Handle KeyError / unsupported operator with a clear message
+#   5. Use the else block to print the result only when no error
+#   6. Use finally to always print "Calculator session ended."
+#   7. Loop until the user types "quit" as the first number
+#
+# Expected output (example run):
+#   Enter first number (or 'quit'): 10
+#   Enter second number: 0
+#   Enter operator (+,-,*,/): /
+#   Error: Cannot divide by zero!
+#   Calculator session ended.
+#   Enter first number (or 'quit'): 10
+#   Enter second number: 5
+#   Enter operator (+,-,*,/): *
+#   Result: 50.0
+#   Calculator session ended.
+#   Enter first number (or 'quit'): quit
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -207,3 +303,42 @@ except ValueError as msg:
 #          "ZeroDivision", "Done" for chain(0) — fails at 10/0 before int("hello")
 
 # BONUS 2: <class 'ValueError'>, "invalid literal for int() with base 10: 'abc'", same
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: D
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: D
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: try
+# FIB_2: e  (or any variable name — 'e' is convention)
+# FIB_3: ValueError
+# FIB_4: IndexError
+# FIB_5: else
+# FIB_6: KeyError
+# FIB_7: try/except
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# ops = {"+": lambda a,b: a+b, "-": lambda a,b: a-b,
+#         "*": lambda a,b: a*b, "/": lambda a,b: a/b}
+# while True:
+#     first = input("Enter first number (or 'quit'): ")
+#     if first.lower() == "quit":
+#         break
+#     try:
+#         a = float(first)
+#         b = float(input("Enter second number: "))
+#         op = input("Enter operator (+,-,*,/): ")
+#         if op not in ops:
+#             raise KeyError(f"Unknown operator: {op}")
+#         result = ops[op](a, b)
+#     except ValueError:
+#         print("Error: Please enter valid numbers!")
+#     except ZeroDivisionError:
+#         print("Error: Cannot divide by zero!")
+#     except KeyError as e:
+#         print(f"Error: {e}")
+#     else:
+#         print(f"Result: {result}")
+#     finally:
+#         print("Calculator session ended.")
+

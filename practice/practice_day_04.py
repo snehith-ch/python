@@ -209,6 +209,99 @@ print(a, b)
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which symbol creates a single-line comment in Python?
+#    A) //    B) /*    C) #    D) --
+# Answer: ___
+
+# Q_MCQ_2. Which of these is a VALID Python identifier?
+#    A) 2ndValue    B) my variable    C) _secret    D) while
+# Answer: ___
+
+# Q_MCQ_3. What is the correct way to assign 0 to variables a, b, c
+#           all in ONE line?
+#    A) a, b, c = 0        B) a = b = c = 0
+#    C) a=0 b=0 c=0        D) assign a,b,c to 0
+# Answer: ___
+
+# Q_MCQ_4. Naming convention for a CONSTANT in Python:
+#    A) camelCase           B) PascalCase
+#    C) ALL_CAPS_WITH_UNDERSCORE    D) snake_case
+# Answer: ___
+
+# Q_MCQ_5. What does  a, b = b, a  do?
+#    A) Creates two new variables     B) Swaps the values of a and b
+#    C) Adds a and b                  D) Deletes both variables
+# Answer: ___
+
+# Q_MCQ_6. Which of these CANNOT be used as a variable name?
+#    A) my_var    B) _data    C) class    D) total99
+# Answer: ___
+
+# Q_MCQ_7. A multi-line comment (docstring) in Python uses:
+#    A) /* ... */    B) // ... //    C) ''' ... '''    D) ## ... ##
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. To disable a line of code without deleting it, use _______ before it.
+
+# FIB_2. Python has _______ reserved keywords (in Python 3.10).
+
+# FIB_3. Identifiers CANNOT start with a _______ or contain _______.
+
+# FIB_4. p, q, r = 10, 20, 30  is called _______ assignment.
+
+# FIB_5. x, y = y, x  swaps values using Python's _______ assignment trick.
+
+# FIB_6. class_name = "Python"  fixes the bug where _______ was used
+#         as a variable name (which is a keyword).
+
+# FIB_7. A variable that should not change by convention is written
+#         in _______ case, e.g. MAX_RETRIES = 3.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Set up a student report card system using proper Python
+#           conventions for variables, comments, and assignment.
+#
+# Requirements:
+#   1. Add a multi-line comment (triple-quote) at the top:
+#      Program: Student Report Card,  Author: your name,  Purpose: ...
+#   2. Use chained assignment to initialize 5 subject marks to 0
+#      (english = maths = science = history = art = 0)
+#   3. Use multiple assignment to set real values in ONE line:
+#      english=85, maths=92, science=78, history=88, art=95
+#   4. Use a CONSTANT for the pass mark: PASS_MARK = 50
+#   5. Print each subject and mark. Check each against PASS_MARK.
+#   6. Print total and average. Swap the highest and lowest marks
+#      using the one-line swap trick and print before/after.
+#
+# Expected output:
+#   English  : 85 ✓ Pass
+#   Maths    : 92 ✓ Pass
+#   Science  : 78 ✓ Pass
+#   History  : 88 ✓ Pass
+#   Art      : 95 ✓ Pass
+#   Total: 438   Average: 87.6
+#   Before swap — highest: 95, lowest: 78
+#   After swap  — highest: 78, lowest: 95
+#
+# Hint: Use f-strings with :<8 to align subject names.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -307,3 +400,39 @@ print(a, b)
 # print("Chemistry:", chemistry)
 # print("Maths:", maths)
 # print("Total:", total)
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: B   Q_MCQ_6: C   Q_MCQ_7: C
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: #  (hash/pound sign)
+# FIB_2: 35
+# FIB_3: digit (number);  spaces or special characters
+# FIB_4: multiple (tuple unpacking)
+# FIB_5: multiple / tuple unpacking
+# FIB_6: class  (a reserved keyword)
+# FIB_7: UPPER (ALL_CAPS)
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# '''
+# Program: Student Report Card
+# Author: Snehith
+# Purpose: Track and display marks for 5 subjects
+# '''
+# PASS_MARK = 50
+# english = maths = science = history = art = 0          # chained assignment
+# english, maths, science, history, art = 85, 92, 78, 88, 95   # multiple assignment
+# subjects = [("English", english), ("Maths", maths), ("Science", science),
+#             ("History", history), ("Art", art)]
+# for name, mark in subjects:
+#     status = "✓ Pass" if mark >= PASS_MARK else "✗ Fail"
+#     print(f"{name:<8}: {mark} {status}")
+# total = english + maths + science + history + art
+# print(f"Total: {total}   Average: {total/5:.1f}")
+# highest, lowest = 95, 78
+# print(f"Before swap — highest: {highest}, lowest: {lowest}")
+# highest, lowest = lowest, highest
+# print(f"After swap  — highest: {highest}, lowest: {lowest}")
+

@@ -232,6 +232,92 @@ print(x is y)
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does  10 // 3  return?
+#    A) 3.33    B) 3    C) 1    D) 0
+# Answer: ___
+
+# Q_MCQ_2. What is the result of  2 ** 10?
+#    A) 20    B) 200    C) 1024    D) 512
+# Answer: ___
+
+# Q_MCQ_3. x += 5  is equivalent to:
+#    A) x = 5      B) x = x + 5    C) x == x + 5    D) x =+ 5
+# Answer: ___
+
+# Q_MCQ_4. What does  5 is 5  evaluate to (for small ints)?
+#    A) False    B) True — same value      C) True — same object in memory
+#    D) Error — 'is' only works on strings
+# Answer: ___
+
+# Q_MCQ_5. Which checks if 7 is in the list [1, 3, 5, 7, 9]?
+#    A) 7 == [1,3,5,7,9]    B) 7 in [1,3,5,7,9]
+#    C) 7.in([1,3,5,7,9])   D) contains(7, [1,3,5,7,9])
+# Answer: ___
+
+# Q_MCQ_6. What does  not (5 > 3)  return?
+#    A) True    B) False    C) 5    D) 3
+# Answer: ___
+
+# Q_MCQ_7. What is  17 % 5?
+#    A) 3    B) 2    C) 1    D) 4
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. The operator that gives the REMAINDER of division is _______.
+#         15 % 4 = _______.
+
+# FIB_2. The floor division operator is _______. 11 // 4 = _______.
+
+# FIB_3. True and False = _______,   True or False = _______.
+
+# FIB_4. "not in" checks if a value is _______ in a sequence.
+
+# FIB_5. x **= 3  means x = x _______ 3.
+
+# FIB_6. (3 + 4 * 2)  evaluates to _______ because _______ has
+#         higher precedence than _______.
+
+# FIB_7. x = 10; x //= 3  → x becomes _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Smart Calculator App — supports all operator types.
+#
+# Requirements:
+#   1. Take two numbers (as input, convert to float) and an
+#      operator (+, -, *, /, //, %, **) as input
+#   2. Compute the result using if/elif based on operator
+#   3. After computing, also show:
+#      a) Is the result positive? (use > 0)
+#      b) Is result an integer? (use % 1 == 0)
+#      c) Is result in range 1–100? (use 'in range')
+#      d) Is result None? (use 'is not None')
+#   4. Handle ZeroDivisionError for / and //
+#
+# Expected output (example — inputs: 15, 4, %):
+#   15.0 % 4.0 = 3.0
+#   Positive      : True
+#   Whole number  : True
+#   In range 1-100: True
+#   Is None       : False
+#
+# Hint: Use a dict {'+': lambda a,b: a+b, ...} for clean operator lookup.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -264,3 +350,42 @@ print(x is y)
 # Q13: True (cached), False (not cached), True, True
 
 # Q14: id(a) == id(c), id(b) is different
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: %  (modulo);  3
+# FIB_2: //;  2
+# FIB_3: False;  True
+# FIB_4: NOT present
+# FIB_5: **
+# FIB_6: 11;  multiplication (*);  addition (+)
+# FIB_7: 3
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# a  = float(input("Enter first number : "))
+# b  = float(input("Enter second number: "))
+# op = input("Operator (+,-,*,/,//,%,**): ")
+# ops = {'+': lambda x,y: x+y, '-': lambda x,y: x-y,
+#        '*': lambda x,y: x*y, '**': lambda x,y: x**y,
+#        '%': lambda x,y: x%y}
+# try:
+#     if op in ('/', '//'):
+#         if b == 0: raise ZeroDivisionError
+#         result = a/b if op=='/' else a//b
+#     elif op in ops:
+#         result = ops[op](a, b)
+#     else:
+#         print("Unknown operator"); result = None
+#     if result is not None:
+#         print(f"{a} {op} {b} = {result}")
+#         print(f"Positive      : {result > 0}")
+#         print(f"Whole number  : {result % 1 == 0}")
+#         print(f"In range 1-100: {1 <= result <= 100}")
+#         print(f"Is None       : {result is None}")
+# except ZeroDivisionError:
+#     print("Error: Cannot divide by zero!")
+

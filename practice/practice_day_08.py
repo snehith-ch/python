@@ -203,6 +203,103 @@ print(b >> 1)
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does the bitwise AND (&) operator do?
+#    A) Returns 1 when EITHER bit is 1
+#    B) Returns 1 ONLY when BOTH bits are 1
+#    C) Flips all bits
+#    D) Shifts bits left
+# Answer: ___
+
+# Q_MCQ_2. What is  5 | 3?  (5=0101, 3=0011)
+#    A) 1    B) 6    C) 7    D) 15
+# Answer: ___
+
+# Q_MCQ_3. What does  1 << 3  compute?
+#    A) 3    B) 4    C) 8    D) 16
+# Answer: ___
+
+# Q_MCQ_4. ~5  in Python evaluates to:
+#    A) -5    B) -6    C) 4    D) 6
+# Answer: ___
+
+# Q_MCQ_5. Which operator returns 1 only when the bits DIFFER?
+#    A) &    B) |    C) ^    D) ~
+# Answer: ___
+
+# Q_MCQ_6. What is  16 >> 2?
+#    A) 4    B) 8    C) 64    D) 2
+# Answer: ___
+
+# Q_MCQ_7. What is  5 & 3?  (5=0101, 3=0011)
+#    A) 7    B) 6    C) 2    D) 1
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. 5 in binary is _______,   3 in binary is _______.
+
+# FIB_2. 5 & 3 = _______  (AND keeps bits where BOTH are 1).
+
+# FIB_3. 5 ^ 3 = _______  (XOR gives 1 where bits _______ ).
+
+# FIB_4. Left shift multiplies by _______.  8 << 1 = _______.
+
+# FIB_5. Right shift divides by _______.  20 >> 2 = _______.
+
+# FIB_6. ~n  equals _______ in Python (two's complement rule).
+
+# FIB_7. bin(13) returns _______.  int('1101', 2) returns _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Access Control System using Bitwise Permission Flags.
+# In many real systems (Linux, databases), permissions are stored
+# as a single integer using bits.
+#
+# Flags:
+#   READ    = 1   (binary 001)
+#   WRITE   = 2   (binary 010)
+#   EXECUTE = 4   (binary 100)
+#
+# Requirements:
+#   1. Define the three permission flags as constants
+#   2. Create a user with permission = 5 (READ + EXECUTE = 101)
+#   3. Check: can the user READ?   (use & flag, result != 0)
+#             can the user WRITE?
+#             can the user EXECUTE?
+#   4. GRANT WRITE permission using | (bitwise OR)
+#   5. REVOKE EXECUTE permission using & ~ (AND NOT)
+#   6. TOGGLE READ permission using ^ (XOR)
+#   7. Print bin() of permission at each step
+#
+# Expected output:
+#   Initial permission: 5 (0b101)
+#   Can READ   : True
+#   Can WRITE  : False
+#   Can EXECUTE: True
+#   After granting WRITE : 7 (0b111)
+#   After revoking EXECUTE: 3 (0b011)
+#   After toggling READ : 2 (0b010)
+#
+# Hint: To check: (permission & FLAG) != 0
+#       To grant:  permission |= FLAG
+#       To revoke: permission &= ~FLAG
+#       To toggle: permission ^= FLAG
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -244,3 +341,32 @@ print(b >> 1)
 # Version 2: Only B prints (elif stops at first True)
 
 # BONUS 3: 2, 14, 12, -11, 20, 3
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: C   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: A   Q_MCQ_7: D
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 0b101 (101);  0b011 (011)
+# FIB_2: 1
+# FIB_3: 6;  differ (are different)
+# FIB_4: 2;  16
+# FIB_5: 4;  5
+# FIB_6: -(n+1)   e.g., ~5 = -6
+# FIB_7: '0b1101';  13
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# READ, WRITE, EXECUTE = 1, 2, 4
+# permission = 5   # READ + EXECUTE
+# print(f"Initial permission: {permission} ({bin(permission)})")
+# print(f"Can READ   : {bool(permission & READ)}")
+# print(f"Can WRITE  : {bool(permission & WRITE)}")
+# print(f"Can EXECUTE: {bool(permission & EXECUTE)}")
+# permission |= WRITE
+# print(f"After granting WRITE : {permission} ({bin(permission)})")
+# permission &= ~EXECUTE
+# print(f"After revoking EXECUTE: {permission} ({bin(permission)})")
+# permission ^= READ
+# print(f"After toggling READ : {permission} ({bin(permission)})")
+

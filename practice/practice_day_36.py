@@ -218,6 +218,89 @@ print(type(c), c)    # prediction:
 # YOUR CODE HERE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which module serializes Python objects to binary files?
+#    A) json    B) csv    C) pickle    D) struct
+# Answer: ___
+
+# Q_MCQ_2. pickle.dump(obj, file)  requires the file to be opened with:
+#    A) "w"    B) "wb"    C) "r"    D) "rb"
+# Answer: ___
+
+# Q_MCQ_3. pickle.load(file)  requires the file to be opened with:
+#    A) "r"    B) "rb"    C) "w"    D) "wb"
+# Answer: ___
+
+# Q_MCQ_4. What is "pickling"?
+#    A) Compressing a file    B) Converting Python object → bytes
+#    C) Encrypting data    D) Sorting a list
+# Answer: ___
+
+# Q_MCQ_5. Compared to JSON, pickle can store:
+#    A) Only strings    B) Only numbers
+#    C) Any Python object including custom classes    D) Only lists/dicts
+# Answer: ___
+
+# Q_MCQ_6. To append a new pickled object to an existing binary file:
+#    A) "w"    B) "ab"    C) "rb"    D) "xb"
+# Answer: ___
+
+# Q_MCQ_7. Reading a pickle file from an untrusted source is dangerous because:
+#    A) It is too slow    B) It can execute arbitrary code during unpickling
+#    C) It corrupts the file    D) Python does not support it
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import _______ to use Python's binary serialization module.
+
+# FIB_2. pickle._______(object, file)  serializes an object to a binary file.
+
+# FIB_3. The reverse operation of pickling is called _______.
+
+# FIB_4. Pickle can store _______ Python objects, including custom class instances.
+
+# FIB_5. To open a file for binary reading: open("data.pkl", "_______").
+
+# FIB_6. JSON stores data as _______, while pickle stores as _______.
+
+# FIB_7. pickle.dumps(obj) returns the pickled object as _______ (not writing
+#         to a file).
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Student Database with Pickle — persist student records.
+#
+# Requirements:
+#   1. Create a Student class with: name, age, marks (list of 3 subjects)
+#      and a method  average() -> float
+#   2. Create a list of 5 Student objects
+#   3. Pickle the list to "students.pkl"
+#   4. Load the list back from "students.pkl" (unpickle)
+#   5. Display each student's name and average mark
+#   6. Add one more student, re-pickle the updated list
+#   7. Verify by loading and printing the count
+#
+# Expected output:
+#   Saved 5 students to students.pkl
+#   === Loaded Students ===
+#   Alice  : avg = 85.3
+#   Bob    : avg = 72.0
+#   ...
+#   Added Carol. Total: 6 students in students.pkl
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -237,3 +320,50 @@ print(type(c), c)    # prediction:
 # Q7: {'name': 'Alice', 'marks': [90, 85, 92], 'grade': 'A'}, Alice, 267
 
 # BONUS 1: <class 'int'> 42, <class 'float'> 3.14, <class 'str'> hello
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: pickle
+# FIB_2: dump
+# FIB_3: unpickling  (deserializing)
+# FIB_4: any / all
+# FIB_5: "rb"
+# FIB_6: human-readable text; binary bytes
+# FIB_7: a bytes object
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import pickle
+#
+# class Student:
+#     def __init__(self, name, age, marks):
+#         self.name = name; self.age = age; self.marks = marks
+#     def average(self):
+#         return sum(self.marks) / len(self.marks)
+#
+# students = [
+#     Student("Alice", 20, [90, 85, 81]),
+#     Student("Bob",   21, [70, 75, 71]),
+#     Student("Carol", 22, [88, 92, 95]),
+#     Student("David", 20, [60, 65, 58]),
+#     Student("Eve",   21, [77, 80, 83]),
+# ]
+# with open("students.pkl", "wb") as f:
+#     pickle.dump(students, f)
+# print(f"Saved {len(students)} students to students.pkl")
+#
+# with open("students.pkl", "rb") as f:
+#     loaded = pickle.load(f)
+# print("=== Loaded Students ===")
+# for s in loaded:
+#     print(f"{s.name:<8}: avg = {s.average():.1f}")
+#
+# loaded.append(Student("Frank", 23, [88, 91, 87]))
+# with open("students.pkl", "wb") as f:
+#     pickle.dump(loaded, f)
+# with open("students.pkl", "rb") as f:
+#     final = pickle.load(f)
+# print(f"Added Frank. Total: {len(final)} students in students.pkl")
+

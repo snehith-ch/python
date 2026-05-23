@@ -261,6 +261,101 @@ t.join()
 # YOUR ANSWERS:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which module provides threading in Python?
+#    A) multiprocessing    B) concurrent    C) threading    D) asyncio
+# Answer: ___
+
+# Q_MCQ_2. To start a thread, you call:
+#    A) thread.run()    B) thread.start()    C) thread.begin()    D) thread.execute()
+# Answer: ___
+
+# Q_MCQ_3. thread.join()  makes the main program:
+#    A) Terminate immediately    B) Wait until the thread finishes
+#    C) Pause for 1 second    D) Kill the thread
+# Answer: ___
+
+# Q_MCQ_4. What is a Race Condition?
+#    A) Two threads competing in a performance benchmark
+#    B) Multiple threads accessing/modifying shared data simultaneously
+#    C) A thread running faster than expected
+#    D) A deadlock situation
+# Answer: ___
+
+# Q_MCQ_5. threading.Lock() is used to:
+#    A) Stop a thread permanently
+#    B) Prevent simultaneous access to shared resources
+#    C) Create a new thread
+#    D) Set thread priority
+# Answer: ___
+
+# Q_MCQ_6. The GIL (Global Interpreter Lock) means:
+#    A) Python threads run truly in parallel on multiple CPUs
+#    B) Only one thread executes Python bytecode at a time
+#    C) Threads cannot share variables
+#    D) Threading is disabled in Python 3
+# Answer: ___
+
+# Q_MCQ_7. threading.Thread(target=func, args=(x,)) passes  x  to  func  via:
+#    A) A global variable    B) The args parameter as a tuple
+#    C) A shared queue    D) Return value of func
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import _______ to use threads in Python.
+
+# FIB_2. t = threading.Thread(target=_______, args=(arg1,)) creates a thread
+#         that calls the given function.
+
+# FIB_3. Calling t._______() starts the thread's execution.
+
+# FIB_4. Calling t._______() blocks the caller until the thread finishes.
+
+# FIB_5. A threading._______ prevents race conditions on shared data.
+
+# FIB_6. lock.acquire() and lock.release() can also be written as
+#         with lock: _______ (using the context manager).
+
+# FIB_7. The GIL limits CPU-bound parallelism; for CPU-heavy work use
+#         _______ instead of threading.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Parallel File Download Simulator using threads.
+#
+# Requirements:
+#   1. Simulate downloading 5 files with different sizes (use time.sleep)
+#   2. Run all downloads in PARALLEL using threading.Thread
+#   3. Print "[filename] download started" and "[filename] done (X.Xs)"
+#   4. Use thread.join() for all threads before printing the summary
+#   5. Track total time using time.time()
+#   6. Use a Lock to safely print from multiple threads without overlap
+#
+# Expected output (order may vary):
+#   file1.zip  download started
+#   file3.pdf  download started
+#   file2.mp4  download started
+#   ...
+#   file1.zip  done (1.0s)
+#   file3.pdf  done (1.5s)
+#   ...
+#   All 5 downloads complete. Total time: 2.5s
+#
+# Hint: sizes = [1.0, 2.5, 1.5, 0.8, 2.0] seconds of "download time"
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -298,3 +393,35 @@ t.join()
 #          b) Default thread every Python program starts with
 #          c) start() begins execution; join() waits for thread to finish
 #          d) Without class, extending Thread, without extending Thread
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: threading
+# FIB_2: the function name (e.g. my_func)
+# FIB_3: start
+# FIB_4: join
+# FIB_5: Lock
+# FIB_6: the code block inside the with statement
+# FIB_7: multiprocessing
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import threading, time
+#
+# lock = threading.Lock()
+# files = [("file1.zip",1.0),("file2.mp4",2.5),("file3.pdf",1.5),
+#          ("file4.docx",0.8),("file5.iso",2.0)]
+#
+# def download(name, duration):
+#     with lock: print(f"{name:12} download started")
+#     time.sleep(duration)
+#     with lock: print(f"{name:12} done ({duration}s)")
+#
+# start = time.time()
+# threads = [threading.Thread(target=download, args=(n,d)) for n,d in files]
+# for t in threads: t.start()
+# for t in threads: t.join()
+# print(f"All {len(files)} downloads complete. Total time: {time.time()-start:.1f}s")
+

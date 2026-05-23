@@ -253,6 +253,93 @@ with open("bonus.log", "r") as f:
     print(f.read())    # prediction (4 lines):
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. assert condition, "message"  raises _______ if condition is False.
+#    A) ValueError    B) AssertionError    C) RuntimeError    D) SyntaxError
+# Answer: ___
+
+# Q_MCQ_2. Python assertions can be disabled globally by running with:
+#    A) python -d    B) python -O    C) python --no-assert    D) python -A
+# Answer: ___
+
+# Q_MCQ_3. Which logging level is the LEAST severe?
+#    A) WARNING    B) ERROR    C) DEBUG    D) CRITICAL
+# Answer: ___
+
+# Q_MCQ_4. logging.basicConfig(level=logging.WARNING) means:
+#    A) Only WARNING and above messages are shown
+#    B) Only WARNING messages are shown
+#    C) DEBUG and INFO are shown too
+#    D) All levels are suppressed
+# Answer: ___
+
+# Q_MCQ_5. What is the default logging level if not set?
+#    A) DEBUG    B) INFO    C) WARNING    D) ERROR
+# Answer: ___
+
+# Q_MCQ_6. logging.debug("msg")  is typically used for:
+#    A) Production error alerts    B) Development/diagnostic information
+#    C) Critical system failures    D) User-facing messages
+# Answer: ___
+
+# Q_MCQ_7. To write logs to a file instead of console:
+#    A) print("log", file=f)    B) logging.basicConfig(filename="app.log")
+#    C) logging.FileHandler only    D) Not possible in Python
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. assert x > 0, "_______"  — the string after the comma is the
+#         _______ message shown if the assertion fails.
+
+# FIB_2. Assertions are best used for _______ checks (developer errors),
+#         not for handling runtime user errors.
+
+# FIB_3. Logging severity from low to high:
+#         DEBUG < _______ < WARNING < ERROR < CRITICAL
+
+# FIB_4. logging.basicConfig(level=logging._______) shows ALL log levels.
+
+# FIB_5. A Logger can have multiple _______ (e.g., FileHandler + StreamHandler).
+
+# FIB_6. logging.getLogger(_______) gets the module-level logger by name.
+
+# FIB_7. logging.basicConfig(format="%(asctime)s %(levelname)s %(message)s")
+#         adds a _______ to each log line.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Bank Transaction Logger with assertions and proper logging.
+#
+# Requirements:
+#   1. Create a BankAccount class with: balance, deposit(amt), withdraw(amt)
+#   2. Use assert to validate: deposit amount > 0, withdrawal <= balance
+#   3. Set up logging to BOTH console (INFO+) and "bank.log" (DEBUG+)
+#   4. Log every deposit/withdrawal at INFO level
+#   5. Log assertion errors at ERROR level (catch AssertionError)
+#   6. Log the final balance at INFO level
+#   7. Test with: 3 valid transactions + 1 invalid withdrawal + 1 negative deposit
+#
+# Expected output (console):
+#   INFO:bank: Account created. Balance: 1000
+#   INFO:bank: Deposited 500. Balance: 1500
+#   INFO:bank: Withdrew 200. Balance: 1300
+#   ERROR:bank: AssertionError: Withdrawal 2000 exceeds balance 1300
+#   ERROR:bank: AssertionError: Deposit amount must be positive
+#   INFO:bank: Final balance: 1300
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -291,3 +378,48 @@ with open("bonus.log", "r") as f:
 # BONUS 2: "AssertionError" (no message), "AssertionError: Custom message"
 
 # BONUS 3: DEBUG:Step 0, DEBUG:Step 1, DEBUG:Step 2, WARNING:Something odd
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: C   Q_MCQ_4: A
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: AssertionError  (the string is the error message)
+# FIB_2: internal / invariant / programmer
+# FIB_3: INFO
+# FIB_4: DEBUG
+# FIB_5: handlers
+# FIB_6: __name__  (the module name)
+# FIB_7: timestamp
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import logging
+#
+# logger = logging.getLogger("bank")
+# logger.setLevel(logging.DEBUG)
+# fmt = logging.Formatter("%(levelname)s:%(name)s: %(message)s")
+# sh = logging.StreamHandler(); sh.setLevel(logging.INFO); sh.setFormatter(fmt)
+# fh = logging.FileHandler("bank.log"); fh.setLevel(logging.DEBUG); fh.setFormatter(fmt)
+# logger.addHandler(sh); logger.addHandler(fh)
+#
+# class BankAccount:
+#     def __init__(self, balance):
+#         self.balance = balance
+#         logger.info(f"Account created. Balance: {self.balance}")
+#     def deposit(self, amt):
+#         assert amt > 0, f"Deposit amount must be positive"
+#         self.balance += amt
+#         logger.info(f"Deposited {amt}. Balance: {self.balance}")
+#     def withdraw(self, amt):
+#         assert amt <= self.balance, f"Withdrawal {amt} exceeds balance {self.balance}"
+#         self.balance -= amt
+#         logger.info(f"Withdrew {amt}. Balance: {self.balance}")
+#
+# acc = BankAccount(1000)
+# for op, val in [("deposit",500),("withdraw",200),("withdraw",2000),("deposit",-100)]:
+#     try:
+#         getattr(acc, op)(val)
+#     except AssertionError as e:
+#         logger.error(f"AssertionError: {e}")
+# logger.info(f"Final balance: {acc.balance}")
+

@@ -266,6 +266,95 @@ print(value(5))    # prediction: decorators apply bottom-up → negate first, th
 # YOUR ANSWER:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. A decorator is a function that:
+#    A) Adds syntax sugar to loops    B) Wraps another function to extend it
+#    C) Replaces class methods    D) Only works with built-in functions
+# Answer: ___
+
+# Q_MCQ_2. The @decorator syntax is equivalent to:
+#    A) decorator = func    B) func = decorator(func)
+#    C) func.apply(decorator)    D) import decorator
+# Answer: ___
+
+# Q_MCQ_3. A generator function uses  _______ instead of return.
+#    A) send    B) yield    C) produce    D) output
+# Answer: ___
+
+# Q_MCQ_4. next(gen)  on a generator:
+#    A) Resets the generator    B) Produces the next yielded value
+#    C) Returns all values    D) Raises StopIteration immediately
+# Answer: ___
+
+# Q_MCQ_5. What does  functools.wraps(func)  do inside a decorator?
+#    A) Wraps the function in a class    B) Preserves the original function's name and docstring
+#    C) Caches the function's result    D) Makes the function thread-safe
+# Answer: ___
+
+# Q_MCQ_6. Generators are memory-efficient because:
+#    A) They use C extensions    B) They compute values lazily (one at a time)
+#    C) They compress data    D) They cache all results
+# Answer: ___
+
+# Q_MCQ_7. Which is a valid generator expression?
+#    A) [x*2 for x in range(5)]    B) {x*2 for x in range(5)}
+#    C) (x*2 for x in range(5))    D) <x*2 for x in range(5)>
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. A decorator is applied to a function using the _______ symbol.
+
+# FIB_2. def outer(func):
+#             def wrapper(*args, **kwargs):
+#                 ...
+#                 return func(*args, **kwargs)
+#             return _______   ← the decorator returns this.
+
+# FIB_3. A generator pauses at _______ and resumes when next() is called.
+
+# FIB_4. Calling a generator function returns a _______ object.
+
+# FIB_5. from functools import _______ is used to preserve metadata in decorators.
+
+# FIB_6. Generator expressions use _______ brackets (not square or curly).
+
+# FIB_7. StopIteration is raised when the generator has no more _______ to yield.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Data Pipeline using decorators + generators.
+#
+# Requirements:
+#   1. Write a decorator  @timer  that prints how long a function takes
+#   2. Write a decorator  @logger  that prints function name + args on each call
+#   3. Write a generator  infinite_counter(start=0)  that yields 0, 1, 2, ...
+#   4. Write a generator  csv_row_reader(filename)  that yields one row at a
+#      time from a CSV file (lazy — does NOT load all rows at once)
+#   5. Apply @timer and @logger to a  process_data(n)  function that
+#      consumes n values from infinite_counter and returns their sum
+#   6. Print the first 5 rows from csv_row_reader using next()
+#
+# Expected output:
+#   [LOG] process_data called with args=(10,)
+#   [TIMER] process_data took 0.0001s
+#   Sum of first 10 = 45
+#   Row 1: ['Name', 'Score']
+#   Row 2: ['Alice', '92']
+#   ...
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -305,3 +394,63 @@ print(value(5))    # prediction: decorators apply bottom-up → negate first, th
 
 # BONUS 3: List stores all 1M records in RAM before processing.
 #          Generator yields one record at a time — constant memory usage, works for any size.
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: C
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: @  (at sign)
+# FIB_2: wrapper
+# FIB_3: yield
+# FIB_4: generator
+# FIB_5: wraps
+# FIB_6: round / parentheses ( )
+# FIB_7: values
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import time, csv
+# from functools import wraps
+#
+# def timer(func):
+#     @wraps(func)
+#     def wrapper(*a, **kw):
+#         t0 = time.time()
+#         result = func(*a, **kw)
+#         print(f"[TIMER] {func.__name__} took {time.time()-t0:.4f}s")
+#         return result
+#     return wrapper
+#
+# def logger(func):
+#     @wraps(func)
+#     def wrapper(*a, **kw):
+#         print(f"[LOG] {func.__name__} called with args={a}")
+#         return func(*a, **kw)
+#     return wrapper
+#
+# def infinite_counter(start=0):
+#     n = start
+#     while True:
+#         yield n; n += 1
+#
+# def csv_row_reader(filename):
+#     with open(filename, newline="") as f:
+#         for row in csv.reader(f):
+#             yield row
+#
+# @logger
+# @timer
+# def process_data(n):
+#     gen = infinite_counter()
+#     return sum(next(gen) for _ in range(n))
+#
+# print(f"Sum of first 10 = {process_data(10)}")
+#
+# # Create a sample CSV first
+# with open("sample.csv","w",newline="") as f:
+#     csv.writer(f).writerows([["Name","Score"],["Alice","92"],["Bob","78"],
+#                               ["Carol","85"],["David","91"],["Eve","77"]])
+# reader = csv_row_reader("sample.csv")
+# for i in range(5):
+#     print(f"Row {i+1}: {next(reader)}")
+

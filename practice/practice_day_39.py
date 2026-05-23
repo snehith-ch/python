@@ -246,6 +246,99 @@ print(mock_all)           # simulates fetchall()
 # prediction for each:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which library connects Python to MySQL?
+#    A) pyodbc    B) sqlite3    C) mysql.connector    D) psycopg2
+# Answer: ___
+
+# Q_MCQ_2. To install mysql-connector-python:
+#    A) import mysql    B) pip install mysql-connector-python
+#    C) pip install mysql    D) conda install mysql
+# Answer: ___
+
+# Q_MCQ_3. mysql.connector.connect() requires which parameters?
+#    A) host, user, password, database    B) dsn, driver
+#    C) server, port only    D) user, schema
+# Answer: ___
+
+# Q_MCQ_4. cursor.executemany(sql, list_of_tuples) is used to:
+#    A) Run the same query multiple times with different data
+#    B) Fetch multiple rows
+#    C) Create multiple cursors
+#    D) Run multiple different SQL statements
+# Answer: ___
+
+# Q_MCQ_5. In MySQL Python connector, the placeholder for parameterized
+#           queries is:
+#    A) ?    B) %s    C) $    D) {}
+# Answer: ___
+
+# Q_MCQ_6. conn.autocommit = True  means:
+#    A) Every execute() auto-commits to the database
+#    B) Transactions are disabled
+#    C) Only SELECT is auto-committed
+#    D) Rollback is always triggered
+# Answer: ___
+
+# Q_MCQ_7. cursor.description  after a SELECT gives:
+#    A) Row data    B) Column metadata (names, types)
+#    C) Table schema    D) Row count
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import _______.connector to work with MySQL in Python.
+
+# FIB_2. In mysql-connector, parameterized query placeholder is _______.
+
+# FIB_3. conn = mysql.connector.connect(host="localhost", user="root",
+#         password=_______, database="mydb")
+
+# FIB_4. After INSERT/UPDATE/DELETE call conn._______() to persist changes.
+
+# FIB_5. cursor.fetchall() returns a _______ of _______.
+
+# FIB_6. To create a new MySQL database from Python:
+#         cursor.execute("CREATE DATABASE IF NOT EXISTS _______")
+
+# FIB_7. cursor.close() and conn.close() should be called to _______ resources.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Product Inventory System (use sqlite3 if MySQL unavailable).
+#
+# Requirements:
+#   1. Connect to database "inventory.db" (sqlite3)
+#   2. Create table: Products(id, name, price REAL, quantity INT)
+#   3. Insert 5 products using executemany with parameterized queries
+#   4. Display all products sorted by price
+#   5. Update the price of one product by name
+#   6. Delete products where quantity = 0
+#   7. Show total inventory value: SUM(price * quantity)
+#   8. Display remaining products
+#
+# Expected output:
+#   5 products inserted.
+#   === Products by Price ===
+#   1  Pen      10.0   100
+#   3  Eraser   15.0   50
+#   ...
+#   Updated Pen price to 12.0
+#   Deleted 1 out-of-stock product(s).
+#   Total inventory value: Rs. 4850.00
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -282,3 +375,46 @@ print(mock_all)           # simulates fetchall()
 
 # BONUS 1: Error 1: database= parameter missing in connect()
 #          Error 2: values must be a tuple: (%s, %s, %s), (101, "Ali", "HYD")
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: A   Q_MCQ_4: A
+# Q_MCQ_5: B   Q_MCQ_6: A   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: mysql
+# FIB_2: %s
+# FIB_3: "your_password"
+# FIB_4: commit
+# FIB_5: list of tuples
+# FIB_6: the database name (e.g., mydb)
+# FIB_7: release / free
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import sqlite3
+# conn = sqlite3.connect("inventory.db")
+# cur = conn.cursor()
+# cur.execute("DROP TABLE IF EXISTS Products")
+# cur.execute("CREATE TABLE Products(id INT, name TEXT, price REAL, quantity INT)")
+# products = [(1,"Pen",10.0,100),(2,"Notebook",45.0,30),(3,"Eraser",15.0,50),
+#             (4,"Scale",20.0,0),(5,"Sharpener",25.0,60)]
+# cur.executemany("INSERT INTO Products VALUES(?,?,?,?)", products)
+# conn.commit(); print("5 products inserted.")
+#
+# print("=== Products by Price ===")
+# for r in cur.execute("SELECT * FROM Products ORDER BY price"):
+#     print(*r)
+#
+# cur.execute("UPDATE Products SET price=? WHERE name=?", (12.0, "Pen"))
+# conn.commit(); print("Updated Pen price to 12.0")
+#
+# cur.execute("DELETE FROM Products WHERE quantity=0")
+# conn.commit(); print(f"Deleted {cur.rowcount} out-of-stock product(s).")
+#
+# cur.execute("SELECT SUM(price*quantity) FROM Products")
+# total = cur.fetchone()[0]
+# print(f"Total inventory value: Rs. {total:.2f}")
+# print("=== Remaining Products ===")
+# for r in cur.execute("SELECT * FROM Products"):
+#     print(*r)
+# conn.close()
+

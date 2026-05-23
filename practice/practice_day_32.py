@@ -217,6 +217,100 @@ except AppError as e:
     print(f"App problem: {e}")
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. How do you create a custom exception in Python?
+#    A) class MyError:  pass
+#    B) class MyError(Exception):  pass
+#    C) def MyError(Exception):  pass
+#    D) exception MyError:  pass
+# Answer: ___
+
+# Q_MCQ_2. What keyword is used to raise an exception manually?
+#    A) throw    B) raise    C) error    D) except
+# Answer: ___
+
+# Q_MCQ_3. When does the  finally  block execute?
+#    A) Only on success    B) Only on error
+#    C) Always — success or failure    D) Only when re-raising
+# Answer: ___
+
+# Q_MCQ_4. To pass a custom message with a raised exception:
+#    A) raise ValueError    B) raise ValueError("message")
+#    C) error("message")    D) except ValueError("message")
+# Answer: ___
+
+# Q_MCQ_5. What is the base class for ALL built-in exceptions?
+#    A) Error    B) BaseException    C) Exception    D) RuntimeError
+# Answer: ___
+
+# Q_MCQ_6. Which is the correct way to re-raise a caught exception?
+#    A) re-raise    B) raise e    C) raise    D) throw e
+# Answer: ___
+
+# Q_MCQ_7. Custom exceptions should inherit from  Exception  because:
+#    A) It is required by Python syntax
+#    B) It lets them be caught by  except Exception
+#    C) It makes them print automatically
+#    D) All of the above
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. class InvalidAgeError(_______):  pass  — inherits from built-in base.
+
+# FIB_2. To trigger a custom exception:  _______ InvalidAgeError("Too young")
+
+# FIB_3. The  _______  block ALWAYS runs, even if  return  is hit in try.
+
+# FIB_4. You can add a custom message by overriding  _______(self, msg)  in
+#         the exception class.
+
+# FIB_5. Catching  Exception  in an except block catches _______
+#         (all / only user-defined) exceptions.
+
+# FIB_6. If no  except  block matches, the exception _______  up the call stack.
+
+# FIB_7. A finally block is typically used to _______ resources
+#         (e.g., close files, DB connections).
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: User Registration System with custom validation exceptions.
+#
+# Requirements:
+#   1. Define three custom exceptions:
+#      - InvalidAgeError    (age < 18 or > 120)
+#      - InvalidEmailError  (no "@" or no ".")
+#      - WeakPasswordError  (length < 8)
+#   2. Write a  register_user(name, age, email, password)  function that
+#      raises the appropriate custom exception
+#   3. In main code, call register_user inside try/except/finally
+#   4. finally should print "Registration attempt complete."
+#   5. Test with at least 3 cases: one success, two failures
+#
+# Expected output (example):
+#   Registering Alice (17)...
+#   InvalidAgeError: Age must be between 18 and 120. Got: 17
+#   Registration attempt complete.
+#   Registering Bob (25)...
+#   InvalidEmailError: Invalid email: no-at-sign
+#   Registration attempt complete.
+#   Registering Carol (30, carol@mail.com, Str0ngPass)...
+#   User Carol registered successfully!
+#   Registration attempt complete.
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -246,3 +340,46 @@ except AppError as e:
 
 # BONUS 2: "Network problem: Connection timed out"
 #          — TimeoutError IS a NetworkError (inheritance), so first except catches it
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: C   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: C   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: Exception
+# FIB_2: raise
+# FIB_3: finally
+# FIB_4: __init__
+# FIB_5: all  (all exceptions that inherit from Exception)
+# FIB_6: propagates
+# FIB_7: release / close / clean up
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# class InvalidAgeError(Exception): pass
+# class InvalidEmailError(Exception): pass
+# class WeakPasswordError(Exception): pass
+#
+# def register_user(name, age, email, password):
+#     if not (18 <= age <= 120):
+#         raise InvalidAgeError(f"Age must be between 18 and 120. Got: {age}")
+#     if "@" not in email or "." not in email:
+#         raise InvalidEmailError(f"Invalid email: {email}")
+#     if len(password) < 8:
+#         raise WeakPasswordError(f"Password too short: {len(password)} chars")
+#     print(f"User {name} registered successfully!")
+#
+# tests = [
+#     ("Alice", 17, "alice@mail.com", "P@ssword1"),
+#     ("Bob", 25, "no-at-sign", "P@ssword1"),
+#     ("Carol", 30, "carol@mail.com", "Str0ngPass"),
+# ]
+# for args in tests:
+#     name = args[0]
+#     print(f"Registering {name}...")
+#     try:
+#         register_user(*args)
+#     except (InvalidAgeError, InvalidEmailError, WeakPasswordError) as e:
+#         print(f"{type(e).__name__}: {e}")
+#     finally:
+#         print("Registration attempt complete.")
+

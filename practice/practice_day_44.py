@@ -305,6 +305,99 @@ print("Bonus 1 saved")    # prediction:
 # YOUR CODE HERE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. plt.subplots(2, 2)  creates:
+#    A) 2 figures with 2 plots each    B) A 2x2 grid of subplots
+#    C) 4 separate figures    D) A single plot with 4 axes
+# Answer: ___
+
+# Q_MCQ_2. ax.set_title("My Chart")  sets the title of:
+#    A) The entire figure    B) The specific subplot (axes)
+#    C) The x-axis label    D) The legend
+# Answer: ___
+
+# Q_MCQ_3. plt.tight_layout()  is used to:
+#    A) Resize the figure window    B) Prevent subplot labels from overlapping
+#    C) Save the figure    D) Reset all styles
+# Answer: ___
+
+# Q_MCQ_4. ax.pie(sizes, labels=labels)  creates a pie chart where sizes:
+#    A) Must add to 100    B) Are automatically normalized to percentages
+#    C) Must be integers    D) Must be sorted
+# Answer: ___
+
+# Q_MCQ_5. fig.savefig("chart.png", dpi=150)  — dpi controls:
+#    A) File size only    B) Image resolution (dots per inch)
+#    C) Color depth    D) Number of subplots
+# Answer: ___
+
+# Q_MCQ_6. ax.bar_label(bars)  adds:
+#    A) A legend    B) Value labels on top of each bar
+#    C) Axis tick labels    D) Grid lines
+# Answer: ___
+
+# Q_MCQ_7. A stacked bar chart is created in matplotlib using:
+#    A) ax.barh()    B) ax.bar(..., bottom=prev_values)
+#    C) ax.stackplot()    D) ax.fill_between()
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. fig, axes = plt.subplots(2, 2, figsize=(12, 8)) — axes is a
+#         _______ of shape (2, 2) holding each subplot's Axes object.
+
+# FIB_2. To access the top-right subplot in a 2x2 grid: axes[0][_______].
+
+# FIB_3. ax.set_xlabel("Months") and ax.set_ylabel("Score") set the
+#         _______ labels of the subplot.
+
+# FIB_4. plt.savefig("dashboard.png", bbox_inches="_______") ensures
+#         nothing is cut off at the edges.
+
+# FIB_5. ax.legend(loc="_______") places the legend in the upper-right.
+
+# FIB_6. ax.grid(True, alpha=0.3)  adds a _______ with 30% opacity.
+
+# FIB_7. plt.suptitle("Dashboard", fontsize=16)  sets the _______ title
+#         for the entire figure.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Learning Progress Dashboard — FINAL PROJECT
+#           Create a 2x2 subplot dashboard summarizing 44-day learning.
+#
+# Requirements:
+#   1. Generate fake progress data for 44 days:
+#      - daily_scores (random 50-100)
+#      - topics = 11 weekly topics with avg scores
+#      - time_spent per phase: Basics(30%), OOP(25%), Files(20%), Data(25%)
+#      - weekly_practice vs weekly_quiz scores (4 phases x 2 metrics)
+#   2. Top-left:  Line chart — Daily Score Progress (days 1-44)
+#   3. Top-right: Bar chart  — Average Score per Topic (11 topics)
+#   4. Bottom-left: Pie chart — Time Spent by Phase
+#   5. Bottom-right: Stacked bar — Practice vs Quiz per Week (Weeks 1-6)
+#   6. Add title, labels, legend to each subplot
+#   7. Save as "learning_dashboard.png" with dpi=120
+#   8. Print a text summary: overall average, best day, weakest topic
+#
+# Expected output:
+#   Overall average score: 74.3
+#   Best day: Day 38 (score: 98)
+#   Weakest topic: Modules (avg: 63)
+#   Dashboard saved: learning_dashboard.png
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -342,3 +435,80 @@ print("Bonus 1 saved")    # prediction:
 #          b) Stack shows composition (parts of a whole over time)
 #          c) The total/sum of all series at that X point
 #          d) %1.0f shows whole numbers (no decimal): "29%" instead of "29.2%"
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 2D numpy array (ndarray)
+# FIB_2: 1  (axes[0][1])
+# FIB_3: axis
+# FIB_4: "tight"
+# FIB_5: "upper right"
+# FIB_6: grid
+# FIB_7: super  (supertitle / overall figure title)
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import random, matplotlib
+# matplotlib.use("Agg")
+# import matplotlib.pyplot as plt
+# import numpy as np
+#
+# random.seed(42)
+# days = list(range(1, 45))
+# scores = [random.randint(50, 100) for _ in days]
+#
+# topics = ["Python Basics","Data Types","Operators","Strings","Lists",
+#           "Functions","OOP","Files","Modules","Database","Data Science"]
+# topic_avgs = [random.randint(60, 95) for _ in topics]
+#
+# phases = ["Basics","OOP","Files","Data"]
+# time_pct = [30, 25, 20, 25]
+#
+# weeks = ["Wk1","Wk2","Wk3","Wk4","Wk5","Wk6"]
+# practice = [random.randint(65, 95) for _ in weeks]
+# quiz     = [random.randint(60, 90) for _ in weeks]
+#
+# fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+# plt.suptitle("44-Day Python Learning Dashboard", fontsize=16, fontweight="bold")
+#
+# # Top-left: Line chart
+# axes[0][0].plot(days, scores, color="steelblue", linewidth=1.5)
+# axes[0][0].set_title("Daily Score Progress")
+# axes[0][0].set_xlabel("Day"); axes[0][0].set_ylabel("Score")
+# axes[0][0].grid(True, alpha=0.3)
+#
+# # Top-right: Bar chart
+# colors = ["#2196F3" if s >= 80 else "#FF9800" if s >= 70 else "#F44336" for s in topic_avgs]
+# bars = axes[0][1].bar(range(len(topics)), topic_avgs, color=colors)
+# axes[0][1].set_title("Avg Score per Topic")
+# axes[0][1].set_xticks(range(len(topics)))
+# axes[0][1].set_xticklabels(topics, rotation=45, ha="right", fontsize=7)
+# axes[0][1].set_ylabel("Avg Score")
+# axes[0][1].bar_label(bars, fmt="%d", fontsize=7)
+#
+# # Bottom-left: Pie chart
+# axes[1][0].pie(time_pct, labels=phases, autopct="%1.0f%%", startangle=90)
+# axes[1][0].set_title("Time Spent by Phase")
+#
+# # Bottom-right: Stacked bar
+# x = np.arange(len(weeks))
+# axes[1][1].bar(x, practice, label="Practice", color="#4CAF50")
+# axes[1][1].bar(x, quiz, bottom=practice, label="Quiz", color="#2196F3", alpha=0.8)
+# axes[1][1].set_title("Practice vs Quiz Score per Week")
+# axes[1][1].set_xticks(x); axes[1][1].set_xticklabels(weeks)
+# axes[1][1].set_ylabel("Score"); axes[1][1].legend(loc="upper right")
+#
+# plt.tight_layout()
+# plt.savefig("learning_dashboard.png", dpi=120, bbox_inches="tight")
+# plt.close()
+#
+# overall_avg = sum(scores) / len(scores)
+# best_day = days[scores.index(max(scores))]
+# weakest_topic = topics[topic_avgs.index(min(topic_avgs))]
+# print(f"Overall average score: {overall_avg:.1f}")
+# print(f"Best day: Day {best_day} (score: {max(scores)})")
+# print(f"Weakest topic: {weakest_topic} (avg: {min(topic_avgs)})")
+# print("Dashboard saved: learning_dashboard.png")
+

@@ -278,6 +278,109 @@ for i in range(1, 6):
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What is the key difference between  elif  and a second  if?
+#    A) No difference — they behave the same
+#    B) elif only runs if the previous condition was False;
+#       a second if always evaluates regardless
+#    C) elif is faster than if
+#    D) elif can have multiple conditions, if cannot
+# Answer: ___
+
+# Q_MCQ_2. What does  break  do inside a loop?
+#    A) Skips the current iteration and continues
+#    B) Exits the entire loop immediately
+#    C) Pauses the loop temporarily
+#    D) Restarts the loop from the beginning
+# Answer: ___
+
+# Q_MCQ_3. What does  continue  do?
+#    A) Exits the loop
+#    B) Skips the rest of the current iteration and goes to the next
+#    C) Ends the program
+#    D) Pauses execution for 1 second
+# Answer: ___
+
+# Q_MCQ_4. The  else  clause on a  for  loop runs when:
+#    A) The loop runs zero times
+#    B) The loop completes without hitting a break
+#    C) An exception occurs in the loop
+#    D) The loop variable is None
+# Answer: ___
+
+# Q_MCQ_5. What is the purpose of  pass?
+#    A) Skips one iteration
+#    B) Exits the loop
+#    C) Does nothing — acts as a placeholder
+#    D) Prints an empty line
+# Answer: ___
+
+# Q_MCQ_6. How many times does this loop run?
+#           for i in range(2, 10, 3):  print(i)
+#    A) 8    B) 3    C) 4    D) 2
+# Answer: ___
+
+# Q_MCQ_7. Which loop is best when you DON'T know how many iterations
+#           are needed in advance?
+#    A) for loop    B) while loop    C) do-while loop    D) pass loop
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. range(1, 11, 2) generates: _______.
+
+# FIB_2. _______ exits the entire loop; _______ skips to the next iteration.
+
+# FIB_3. The  else  on a while loop runs when the condition becomes _______.
+
+# FIB_4. pass is used as a _______ when a block is syntactically required
+#         but you have no code to put there yet.
+
+# FIB_5. for i in "Python":  → i takes values: _______.
+
+# FIB_6. A while loop with no way to become False causes an _______ loop.
+
+# FIB_7. The  in  keyword in  for i in range(5)  means "_______ of".
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Number Guessing Game with limited attempts.
+#
+# Requirements:
+#   1. Secret number is 42 (hardcoded — no random needed)
+#   2. Player gets 5 attempts (use while loop with counter)
+#   3. After each wrong guess: print "Too high!" or "Too low!"
+#   4. If guess is correct: print "🎉 Correct! You got it in X tries!"
+#      then break the loop
+#   5. Skip invalid inputs (negative numbers or zero) using continue
+#   6. Use pass as placeholder for any future feature comment
+#   7. After the loop: if not guessed, print "Game over! The number was 42."
+#   8. Show remaining attempts each turn
+#
+# Expected output (example run — guesses: 20, 60, 42):
+#   Attempt 1/5 — Enter guess: 20
+#   Too low!
+#   Attempt 2/5 — Enter guess: 60
+#   Too high!
+#   Attempt 3/5 — Enter guess: 42
+#   🎉 Correct! You got it in 3 tries!
+#
+# Hint: Use a flag variable  guessed = False  to know if the loop
+#       exited via break or naturally.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -317,3 +420,47 @@ for i in range(1, 6):
 # Fix: put i += 1 BEFORE the continue
 
 # BONUS 3: 1, 3  (2 is skipped by continue, 4 triggers break)
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 1, 3, 5, 7, 9
+# FIB_2: break;  continue
+# FIB_3: False
+# FIB_4: placeholder / syntactic filler
+# FIB_5: P, y, t, h, o, n
+# FIB_6: infinite
+# FIB_7: each element
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# SECRET = 42
+# MAX_TRIES = 5
+# guessed = False
+# attempts = 0
+# while attempts < MAX_TRIES:
+#     attempts += 1
+#     try:
+#         guess = int(input(f"Attempt {attempts}/{MAX_TRIES} — Enter guess: "))
+#     except ValueError:
+#         print("Please enter a number.")
+#         attempts -= 1
+#         continue
+#     if guess <= 0:
+#         print("Enter a positive number.")
+#         attempts -= 1
+#         continue
+#     pass  # placeholder for future hint feature
+#     if guess == SECRET:
+#         print(f"🎉 Correct! You got it in {attempts} tries!")
+#         guessed = True
+#         break
+#     elif guess < SECRET:
+#         print("Too low!")
+#     else:
+#         print("Too high!")
+# if not guessed:
+#     print(f"Game over! The number was {SECRET}.")
+

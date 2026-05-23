@@ -175,6 +175,93 @@ with open("tell_test.txt", "r") as f:
 print(a, b, c)       # prediction:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Mode "x" opens a file for:
+#    A) Exclusive read    B) XML parsing
+#    C) Create-only (fails if file exists)    D) Execute mode
+# Answer: ___
+
+# Q_MCQ_2. f.tell()  returns:
+#    A) Number of lines    B) Current byte position of the cursor
+#    C) Total file size    D) Whether file is open
+# Answer: ___
+
+# Q_MCQ_3. f.seek(0)  moves the cursor to:
+#    A) End of file    B) Beginning of file    C) Line 0    D) Byte 10
+# Answer: ___
+
+# Q_MCQ_4. Mode "r+"  is used for:
+#    A) Read-only    B) Write-only
+#    C) Read + Write (file must exist)    D) Append + Read
+# Answer: ___
+
+# Q_MCQ_5. After f.seek(0, 2), f.tell() returns:
+#    A) 0    B) 1    C) Total number of lines    D) Total file size in bytes
+# Answer: ___
+
+# Q_MCQ_6. What does  f.seek(0, 1)  mean?
+#    A) Seek to byte 0 from start    B) Seek 0 bytes from current position
+#    C) Seek to end    D) Reset cursor
+# Answer: ___
+
+# Q_MCQ_7. To both read AND write an existing file from the beginning:
+#    A) "r"    B) "w"    C) "r+"    D) "a"
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. f.seek(0) is equivalent to f.seek(0, _______) where 0 = SEEK_SET.
+
+# FIB_2. To find the file size: open in "rb" mode, seek to end with
+#         f.seek(0, _______), then call f.tell().
+
+# FIB_3. Mode "_______" raises FileExistsError if the file already exists.
+
+# FIB_4. f.seek(n, 1) moves  n  bytes from the _______ position.
+
+# FIB_5. To overwrite the first line without deleting the rest, use mode
+#         "_______" and  f.seek(0).
+
+# FIB_6. f.readlines() reads _______, while f.readline() reads _______.
+
+# FIB_7. The two WHENCE values for seek:  0 = _______, 1 = _______, 2 = _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Build a Log File Analyzer that reads, parses, and modifies logs.
+#
+# Requirements:
+#   1. Create "app.log" with 5 sample log lines (INFO, WARNING, ERROR levels)
+#   2. Read the file and count INFO / WARNING / ERROR occurrences
+#   3. Use tell() to record the byte position before each line read
+#   4. Use seek() to re-read a specific line by its stored byte position
+#   5. Append a new ERROR log entry at the end
+#   6. Display the file size in bytes before and after appending
+#
+# Expected output (example):
+#   === Log Summary ===
+#   INFO    : 2
+#   WARNING : 1
+#   ERROR   : 2
+#   File size before: 215 bytes
+#   File size after:  248 bytes
+#   Re-reading first ERROR line: [ERROR] Database connection failed
+#
+# Hint: Use "r+" to read/seek, "a" to append.
+#       Store tell() positions in a list while reading.
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -197,3 +284,58 @@ print(a, b, c)       # prediction:
 
 # BONUS 3: 'W' (position 6 of "Hello World"), 'H' (position 0), 'o' (position 4)
 #          W H o
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: D   Q_MCQ_6: B   Q_MCQ_7: C
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 0
+# FIB_2: 2  (SEEK_END)
+# FIB_3: x
+# FIB_4: current
+# FIB_5: r+
+# FIB_6: all lines as a list; one line as a string
+# FIB_7: start of file; current position; end of file
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# LOG = "app.log"
+# sample = [
+#     "[INFO] Server started\n",
+#     "[INFO] Config loaded\n",
+#     "[WARNING] Memory usage high\n",
+#     "[ERROR] Database connection failed\n",
+#     "[ERROR] Timeout on request /api\n",
+# ]
+# with open(LOG, "w") as f:
+#     f.writelines(sample)
+#
+# counts = {"INFO": 0, "WARNING": 0, "ERROR": 0}
+# positions = {}
+# with open(LOG, "r") as f:
+#     while True:
+#         pos = f.tell()
+#         line = f.readline()
+#         if not line: break
+#         for level in counts:
+#             if f"[{level}]" in line:
+#                 counts[level] += 1
+#                 if level not in positions:
+#                     positions[level] = pos
+#
+# print("=== Log Summary ===")
+# for level, count in counts.items():
+#     print(f"{level:<8}: {count}")
+#
+# import os
+# size_before = os.path.getsize(LOG)
+# with open(LOG, "a") as f:
+#     f.write("[ERROR] New critical error detected\n")
+# size_after = os.path.getsize(LOG)
+# print(f"File size before: {size_before} bytes")
+# print(f"File size after:  {size_after} bytes")
+#
+# with open(LOG, "r") as f:
+#     f.seek(positions["ERROR"])
+#     print(f"Re-reading first ERROR line: {f.readline().strip()}")
+

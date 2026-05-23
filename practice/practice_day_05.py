@@ -267,6 +267,97 @@ print(bool(int(p) - 5))
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does  int(9.9)  return?
+#    A) 10    B) 9    C) 9.9    D) Error
+# Answer: ___
+
+# Q_MCQ_2. What does  input()  ALWAYS return, regardless of what
+#           the user types?
+#    A) int    B) float    C) str    D) The type that matches the input
+# Answer: ___
+
+# Q_MCQ_3. What is the type of  None  in Python?
+#    A) NoneType    B) null    C) undefined    D) void
+# Answer: ___
+
+# Q_MCQ_4. What does  bool(0)  return?
+#    A) True    B) False    C) 0    D) Error
+# Answer: ___
+
+# Q_MCQ_5. Which conversion raises a ValueError?
+#    A) int("42")      B) float("3.14")
+#    C) int("hello")   D) str(100)
+# Answer: ___
+
+# Q_MCQ_6. What does  int(-9.9)  return? (tricky!)
+#    A) -10    B) -9    C) 9    D) Error
+# Answer: ___
+
+# Q_MCQ_7. The real and imaginary parts of  3+4j  are:
+#    A) 3.0 and 4.0    B) 3 and 4    C) "3" and "4j"    D) 3j and 4j
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. int() does NOT round — it _______ toward zero.
+#         int(9.9) = _______,   int(-9.9) = _______.
+
+# FIB_2. type(None) returns _______.
+
+# FIB_3. bool("") = _______,   bool("hello") = _______.
+
+# FIB_4. To convert the string "42" to an integer: _______.
+#         To convert the string "3.14" to a float: _______.
+
+# FIB_5. The complex number 5+3j has .real = _______ and .imag = _______.
+
+# FIB_6. str(3.14) converts the float to the string _______.
+
+# FIB_7. To safely convert user input to int, always wrap it:
+#         age = _______( input("Age: ") )
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Build a shop billing calculator that handles all types
+#           and conversions explicitly.
+#
+# Requirements:
+#   1. Take 3 item names and their prices as input (strings from input())
+#   2. Convert prices to float (show the type before and after conversion)
+#   3. Calculate subtotal
+#   4. Apply 18% GST: gst = subtotal * 0.18
+#   5. Print a formatted bill with item name, price, subtotal, GST, total
+#   6. Show "Cash received" (input as string → float) and compute change
+#   7. Handle edge case: if change < 0, print "Insufficient cash!"
+#
+# Expected output:
+#   ====== BILL ======
+#   Pen         :  10.50
+#   Notebook    :  45.00
+#   Eraser      :   5.00
+#   ------------------
+#   Subtotal    :  60.50
+#   GST (18%)   :  10.89
+#   TOTAL       :  71.39
+#   Cash given  : 100.00
+#   Change      :  28.61
+#
+# Hint: Use  f"{value:>8.2f}"  for right-aligned 2-decimal formatting.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -367,3 +458,43 @@ print(bool(int(p) - 5))
 # 8.0         (float addition)
 # True        (non-empty string)
 # False       (int("5")-5 = 0 → bool(0) = False)
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: A   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: A
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: truncates;  9;  -9
+# FIB_2: <class 'NoneType'>
+# FIB_3: False;  True  (empty string is falsy, non-empty is truthy)
+# FIB_4: int("42");  float("3.14")
+# FIB_5: 5.0;  3.0
+# FIB_6: "3.14"
+# FIB_7: int
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# items = []
+# for _ in range(3):
+#     name  = input("Item name : ")
+#     price = input("Price     : ")
+#     price = float(price)          # str → float conversion
+#     items.append((name, price))
+# subtotal = sum(p for _, p in items)
+# gst      = subtotal * 0.18
+# total    = subtotal + gst
+# print("====== BILL ======")
+# for name, price in items:
+#     print(f"{name:<12}: {price:>7.2f}")
+# print("-" * 18)
+# print(f"{'Subtotal':<12}: {subtotal:>7.2f}")
+# print(f"{'GST (18%)':<12}: {gst:>7.2f}")
+# print(f"{'TOTAL':<12}: {total:>7.2f}")
+# cash = float(input("Cash given: "))
+# change = cash - total
+# print(f"{'Cash given':<12}: {cash:>7.2f}")
+# if change < 0:
+#     print("Insufficient cash!")
+# else:
+#     print(f"{'Change':<12}: {change:>7.2f}")
+

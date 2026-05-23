@@ -224,6 +224,110 @@ c = Child()
 c.process()    # prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Method overriding occurs when:
+#    A) Parent calls child's method    B) Child redefines a method from parent
+#    C) Two classes have the same name    D) A method has two implementations
+# Answer: ___
+
+# Q_MCQ_2. Abstract classes CANNOT be:
+#    A) Inherited    B) Instantiated (cannot create objects directly)
+#    C) Used as parents    D) Extended
+# Answer: ___
+
+# Q_MCQ_3. @abstractmethod makes a method:
+#    A) Private    B) Compulsory to override in child classes
+#    C) Optional to override    D) A class method
+# Answer: ___
+
+# Q_MCQ_4. To create an abstract class, inherit from:
+#    A) object    B) Abstract    C) ABC    D) AbstractBase
+# Answer: ___
+
+# Q_MCQ_5. super().speak()  in a child class calls:
+#    A) The child's speak()    B) The parent class's speak()
+#    C) The grandparent's speak()    D) Python's built-in speak()
+# Answer: ___
+
+# Q_MCQ_6. If a child class does NOT implement all abstract methods:
+#    A) It inherits the abstract methods as-is    B) TypeError when instantiating
+#    C) SyntaxError    D) The methods become optional
+# Answer: ___
+
+# Q_MCQ_7. Python DOES NOT support method overloading (same name, different params)
+#           natively. The Pythonic alternative is:
+#    A) Create multiple classes    B) Use *args/**kwargs with conditions
+#    C) Use C++ extensions         D) Use decorator @overload only
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. from abc import _______ to create abstract base classes.
+
+# FIB_2. @_______ decorator marks a method as abstract.
+
+# FIB_3. Abstract class cannot be _______ directly.
+
+# FIB_4. A child must _______ all abstract methods; otherwise it too
+#         becomes _______.
+
+# FIB_5. super().method() lets the child call the _______ version of a method.
+
+# FIB_6. Polymorphism allows different classes to be used _______ through
+#         a common interface.
+
+# FIB_7. ABCMeta is the _______ that makes a class abstract.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Payment Gateway System with abstract interface.
+#
+# Requirements:
+#   Abstract  PaymentMethod(ABC):
+#   - @abstractmethod process_payment(amount)
+#   - @abstractmethod validate()
+#   - @abstractmethod get_fee(amount) → float
+#   - Concrete method: complete_payment(amount):
+#       if self.validate(): show fee, call process_payment, print "✅ Complete"
+#       else: print "❌ Validation failed"
+#
+#   Implement 3 concrete classes:
+#   CreditCard(PaymentMethod):
+#     - __init__(card_number): store card (must be 16 digits)
+#     - validate(): card_number is 16-digit string
+#     - get_fee(amount): 2% of amount
+#     - process_payment(amount): print "💳 Charged ₹{amount} to card ...{last4}"
+#
+#   UPI(PaymentMethod):
+#     - __init__(upi_id): e.g. "user@okicici"
+#     - validate(): upi_id contains @
+#     - get_fee(amount): 0
+#     - process_payment(amount): print "📱 Sent ₹{amount} via {upi_id}"
+#
+#   Crypto(PaymentMethod):
+#     - __init__(wallet): wallet address string
+#     - validate(): len(wallet) >= 26
+#     - get_fee(amount): 0.5%
+#     - process_payment(amount): print "₿ Transferred {amount} BTC equivalent"
+#
+# Demonstrate:
+#   1. Try to instantiate PaymentMethod() → TypeError
+#   2. Create all 3, call complete_payment(1000) on each
+#   3. Test an INVALID CreditCard (wrong length) — show validation fail
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -249,3 +353,61 @@ c.process()    # prediction:
 
 # BONUS 2: "Base process — can still have body!", "Child process"
 #          Yes — abstract methods CAN have a body, accessible via super()
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: ABC
+# FIB_2: abstractmethod
+# FIB_3: instantiated
+# FIB_4: override;  abstract
+# FIB_5: parent's
+# FIB_6: interchangeably
+# FIB_7: metaclass
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# from abc import ABC, abstractmethod
+# class PaymentMethod(ABC):
+#     @abstractmethod
+#     def process_payment(self, amount): pass
+#     @abstractmethod
+#     def validate(self): pass
+#     @abstractmethod
+#     def get_fee(self, amount): pass
+#     def complete_payment(self, amount):
+#         if self.validate():
+#             fee = self.get_fee(amount)
+#             print(f"  Fee: ₹{fee:.2f}")
+#             self.process_payment(amount)
+#             print(f"  ✅ Payment of ₹{amount} complete!")
+#         else:
+#             print("  ❌ Validation failed — payment cancelled.")
+#
+# class CreditCard(PaymentMethod):
+#     def __init__(self, card): self.card = card
+#     def validate(self): return len(str(self.card)) == 16 and str(self.card).isdigit()
+#     def get_fee(self, amt): return amt * 0.02
+#     def process_payment(self, amt): print(f"  💳 Charged ₹{amt} to card ...{str(self.card)[-4:]}")
+#
+# class UPI(PaymentMethod):
+#     def __init__(self, uid): self.uid = uid
+#     def validate(self): return '@' in self.uid
+#     def get_fee(self, amt): return 0
+#     def process_payment(self, amt): print(f"  📱 Sent ₹{amt} via {self.uid}")
+#
+# class Crypto(PaymentMethod):
+#     def __init__(self, wallet): self.wallet = wallet
+#     def validate(self): return len(self.wallet) >= 26
+#     def get_fee(self, amt): return amt * 0.005
+#     def process_payment(self, amt): print(f"  ₿ Transferred ₹{amt} equivalent in crypto")
+#
+# try: PaymentMethod()
+# except TypeError as e: print(f"TypeError: {e}")
+# for p in [CreditCard("1234567890123456"), UPI("snehith@okicici"), Crypto("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")]:
+#     print(type(p).__name__ + ":")
+#     p.complete_payment(1000)
+# print("Invalid card:"); CreditCard("123").complete_payment(1000)
+

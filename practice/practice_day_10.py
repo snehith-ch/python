@@ -259,6 +259,95 @@ print(len(s))
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What is  "Python"[-1]?
+#    A) 'P'    B) 'n'    C) 'o'    D) 'y'
+# Answer: ___
+
+# Q_MCQ_2. What does  "Hello World"[2:7]  return?
+#    A) "ello "    B) "Hello"    C) "llo W"    D) "llo"
+# Answer: ___
+
+# Q_MCQ_3. Which method converts "hello world" to "Hello World"?
+#    A) .upper()    B) .capitalize()    C) .title()    D) .swapcase()
+# Answer: ___
+
+# Q_MCQ_4. "banana".count("a")  returns:
+#    A) 1    B) 2    C) 3    D) 0
+# Answer: ___
+
+# Q_MCQ_5. "Hello".find("z")  returns:
+#    A) 0    B) -1    C) None    D) Error
+# Answer: ___
+
+# Q_MCQ_6. " ".join(["a", "b", "c"])  returns:
+#    A) "abc"    B) "a b c"    C) ["a","b","c"]    D) "a,b,c"
+# Answer: ___
+
+# Q_MCQ_7. "Python"[::−1]  returns:
+#    A) "Python"    B) "nohtyP"    C) "P"    D) "n"
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. Negative index -1 refers to the _______ character of a string.
+
+# FIB_2. s[1:4]  extracts characters at indices _______, _______, _______.
+#         (start is _______, stop is _______.)
+
+# FIB_3. "hello".upper() = _______,   "WORLD".lower() = _______.
+
+# FIB_4. "apple mango".split()  returns _______.
+
+# FIB_5. "Python".replace("P", "J") = _______.
+
+# FIB_6. "hello".index("z") raises _______, but
+#         "hello".find("z") returns _______.
+
+# FIB_7. "  spacious  ".strip() = _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Username Validator & Formatter for a web app signup.
+#
+# Requirements:
+#   1. Take a username as input()
+#   2. Validate:  a) Length 5-15 chars
+#                 b) Starts with a letter (use isalpha on [0])
+#                 c) No spaces (check ' ' not in username)
+#                 d) Only letters, digits, underscores
+#                    (all chars: c.isalnum() or c == '_')
+#   3. If any check fails, print the specific rule that was violated
+#   4. If valid, print:
+#      - Original, UPPERCASE, title case, reversed
+#      - Count of vowels (a,e,i,o,u) using .count() for each
+#      - Check if username starts/ends with specific letters
+#
+# Expected output (input: "snehith"):
+#   ✓ Username is VALID
+#   Original  : snehith
+#   Uppercase : SNEHITH
+#   Title     : Snehith
+#   Reversed  : htihens
+#   Vowels    : 2  (e, i)
+#   Starts with 's': True
+#   Ends with 'h'  : True
+#
+# Hint: Use a list of (condition, error_message) tuples to validate cleanly.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -307,3 +396,43 @@ print(len(s))
 
 # BONUS 3:
 # D, e, Sci, ecneicSataD, DATASCIENCE, datascience, 2, D@t@Science, ['Data', 'cience'], 11
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: C   Q_MCQ_4: C
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: last
+# FIB_2: 1, 2, 3;  inclusive;  exclusive
+# FIB_3: "HELLO";  "world"
+# FIB_4: ['apple', 'mango']
+# FIB_5: "Jython"
+# FIB_6: ValueError;  -1
+# FIB_7: "spacious"
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# username = input("Enter username: ")
+# errors = []
+# if not (5 <= len(username) <= 15):
+#     errors.append("Length must be 5-15 characters")
+# if not username[0].isalpha():
+#     errors.append("Must start with a letter")
+# if ' ' in username:
+#     errors.append("No spaces allowed")
+# if not all(c.isalnum() or c == '_' for c in username):
+#     errors.append("Only letters, digits, and underscores allowed")
+# if errors:
+#     print("✗ Invalid username:")
+#     for e in errors: print(f"  - {e}")
+# else:
+#     print("✓ Username is VALID")
+#     print(f"Original  : {username}")
+#     print(f"Uppercase : {username.upper()}")
+#     print(f"Title     : {username.title()}")
+#     print(f"Reversed  : {username[::-1]}")
+#     vowels = sum(username.lower().count(v) for v in 'aeiou')
+#     print(f"Vowels    : {vowels}")
+#     print(f"Starts with '{username[0]}': True")
+#     print(f"Ends with '{username[-1]}'  : True")
+

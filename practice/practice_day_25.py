@@ -216,6 +216,102 @@ class Circle:
 # Circle().area(5)   # uncomment — what error? fix it.
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. An instance method's first parameter is always:
+#    A) cls    B) self    C) obj    D) No required first parameter
+# Answer: ___
+
+# Q_MCQ_2. A class method is decorated with:
+#    A) @instance    B) @staticmethod    C) @classmethod    D) @method
+# Answer: ___
+
+# Q_MCQ_3. A static method:
+#    A) Has access to self    B) Has access to cls
+#    C) Has access to neither self nor cls    D) Can only be called on instances
+# Answer: ___
+
+# Q_MCQ_4. Which is a common use case for a CLASS method?
+#    A) Accessing instance attributes    B) Alternative constructor (factory method)
+#    C) Utility/helper function          D) Modifying global state
+# Answer: ___
+
+# Q_MCQ_5. Temperature.from_fahrenheit(212)  is likely a:
+#    A) Instance method    B) Static method    C) Class method    D) Property
+# Answer: ___
+
+# Q_MCQ_6. A static method can be called using:
+#    A) Only instance: obj.method()    B) Only class: ClassName.method()
+#    C) Both class and instance        D) Only via super()
+# Answer: ___
+
+# Q_MCQ_7. Which method type would you use for a utility like  is_valid_email(email)?
+#    A) Instance method    B) Class method    C) Static method    D) Abstract method
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. @classmethod decorator changes the first parameter from self to _______.
+
+# FIB_2. cls refers to the _______ (not an instance).
+
+# FIB_3. A @staticmethod cannot access _______ or _______.
+
+# FIB_4. A class method used to create an object from different input format
+#         is called a _______ method.
+
+# FIB_5. Instance methods are called on _______.
+#         Class methods can be called on _______ OR _______.
+
+# FIB_6. @staticmethod with no self/cls — this makes the method a pure
+#         _______ function that belongs to the class namespace.
+
+# FIB_7. To call a class method from within an instance method:
+#         self._______ or ClassName._______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Temperature Converter utility class.
+#
+# Requirements:
+#   Define  Temperature  class:
+#   - Class variable: unit_system = "Metric"
+#   - __init__(self, celsius): store celsius
+#   - to_fahrenheit(self): instance method → returns C*(9/5)+32
+#   - to_kelvin(self): instance method → returns C+273.15
+#   - from_fahrenheit(cls, f): @classmethod factory → Temperature((f-32)*5/9)
+#   - from_kelvin(cls, k): @classmethod factory → Temperature(k-273.15)
+#   - is_valid(c): @staticmethod → True if -273.15 <= c <= 5778
+#   - __str__(self): "{celsius:.2f}°C = {F:.2f}°F = {K:.2f}K"
+#
+# Then:
+#   1. Create t1 from Celsius directly: Temperature(100)
+#   2. Create t2 from Fahrenheit: Temperature.from_fahrenheit(32)
+#   3. Create t3 from Kelvin: Temperature.from_kelvin(373.15)
+#   4. Print str() for all three
+#   5. Check validity: is_valid(-300) → False, is_valid(25) → True
+#   6. Show unit_system class variable
+#
+# Expected output:
+#   100.00°C = 212.00°F = 373.15K
+#   0.00°C = 32.00°F = 273.15K
+#   100.00°C = 212.00°F = 373.15K
+#   is_valid(-300): False
+#   is_valid(25)  : True
+#   Unit system: Metric
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -238,3 +334,42 @@ class Circle:
 
 # BONUS 2: Missing @staticmethod decorator (or add self parameter)
 #           Fix: add @staticmethod above def area(radius):
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: C   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: C   Q_MCQ_7: C
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: cls
+# FIB_2: class itself
+# FIB_3: self;  cls
+# FIB_4: factory (alternative constructor)
+# FIB_5: objects (instances);  the class;  instances
+# FIB_6: utility / helper
+# FIB_7: class_method_name
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# class Temperature:
+#     unit_system = "Metric"
+#     def __init__(self, celsius):
+#         self.celsius = celsius
+#     def to_fahrenheit(self): return self.celsius * 9/5 + 32
+#     def to_kelvin(self):     return self.celsius + 273.15
+#     @classmethod
+#     def from_fahrenheit(cls, f): return cls((f - 32) * 5/9)
+#     @classmethod
+#     def from_kelvin(cls, k):     return cls(k - 273.15)
+#     @staticmethod
+#     def is_valid(c): return -273.15 <= c <= 5778
+#     def __str__(self):
+#         return f"{self.celsius:.2f}°C = {self.to_fahrenheit():.2f}°F = {self.to_kelvin():.2f}K"
+#
+# t1 = Temperature(100)
+# t2 = Temperature.from_fahrenheit(32)
+# t3 = Temperature.from_kelvin(373.15)
+# for t in [t1, t2, t3]: print(t)
+# print(f"is_valid(-300): {Temperature.is_valid(-300)}")
+# print(f"is_valid(25)  : {Temperature.is_valid(25)}")
+# print(f"Unit system: {Temperature.unit_system}")
+

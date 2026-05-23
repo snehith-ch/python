@@ -198,6 +198,108 @@ e.show()
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. An instance variable is:
+#    A) Shared by all objects    B) Belongs to a specific object (self.x)
+#    C) Defined outside the class    D) A constant value
+# Answer: ___
+
+# Q_MCQ_2. A class (static) variable is:
+#    A) Defined inside __init__ with self    B) Local to each method
+#    C) Defined in class body, shared by all objects    D) Always uppercase
+# Answer: ___
+
+# Q_MCQ_3. If you do  obj.class_var = 99  on an object, what happens?
+#    A) All objects' class_var becomes 99
+#    B) A new instance variable named class_var is created for obj only
+#    C) SyntaxError    D) The class variable is permanently changed
+# Answer: ___
+
+# Q_MCQ_4. Where is a local variable accessible?
+#    A) Across all methods    B) Only inside the method where it's defined
+#    C) In the class and its subclasses    D) In any function in the module
+# Answer: ___
+
+# Q_MCQ_5. Company.employee_count  vs  emp1.employee_count — which is correct
+#           to access a class variable?
+#    A) Only Company.employee_count    B) Only emp1.employee_count
+#    C) Both work; Company. is preferred for class variables    D) Neither
+# Answer: ___
+
+# Q_MCQ_6. What is the value of Dog.legs  after this?
+#           class Dog: legs = 4
+#           d = Dog(); d.legs = 3
+#    A) 3    B) 4    C) Error    D) None
+# Answer: ___
+
+# Q_MCQ_7. A local variable inside __init__ (without self.) is:
+#    A) The same as an instance variable    B) NOT stored in the object
+#    C) A class variable                    D) Accessible from outside
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. self.name = name  creates an _______ variable.
+#         Employee.count = 0  creates a _______ variable.
+
+# FIB_2. A local variable defined inside a method (without self)
+#         is destroyed when the method _______.
+
+# FIB_3. All objects of a class share the same _______ variables.
+
+# FIB_4. ClassName.class_var += 1  modifies the class variable for
+#         _______ objects.
+
+# FIB_5. obj.__dict__  shows all _______ variables of the object.
+
+# FIB_6. temp = self.salary * 0.1  inside a method — temp is a _______ variable.
+
+# FIB_7. Class variables are defined _______ the __init__ method,
+#         directly in the class body.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Bank Branch System showing instance vs class variables.
+#
+# Requirements:
+#   Define  BankAccount  class:
+#   - Class variable: bank_name = "PythonBank", total_accounts = 0
+#   - __init__(holder, balance=0): increment total_accounts, store holder & balance
+#   - deposit(amount): add to balance, print receipt
+#   - withdraw(amount): check balance first; print receipt or "Insufficient funds"
+#   - display(): show holder, balance, bank_name
+#   - classmethod get_total(): returns total_accounts
+#   - __str__: returns "Account[{holder}]: ₹{balance:,}"
+#
+# Then:
+#   1. Create 3 accounts (different holders, different balances)
+#   2. Deposit to account 1; withdraw from account 2 (valid)
+#   3. Try to overdraw account 3
+#   4. Print total_accounts via BOTH Bank.get_total() AND each obj
+#   5. Print all accounts using str()
+#   6. Show bank_name is shared: change BankAccount.bank_name = "NewBank"
+#      → verify all objects show "NewBank" in display()
+#
+# Expected output (partial):
+#   Total accounts created: 3
+#   Snehith: ₹15,000 → deposited ₹5,000 → balance: ₹20,000
+#   Priya  : withdrew ₹2,000 → balance: ₹8,000
+#   Raj    : Insufficient funds (balance: ₹500)
+#   All now show bank: NewBank
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -223,3 +325,55 @@ e.show()
 # Q10: True, AttributeError after del Config.debug, "1.0"
 
 # BONUS 1: local_val, instance_val, class_val
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: instance;  class (static)
+# FIB_2: returns (finishes)
+# FIB_3: class
+# FIB_4: all
+# FIB_5: instance
+# FIB_6: local
+# FIB_7: outside
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# class BankAccount:
+#     bank_name      = "PythonBank"
+#     total_accounts = 0
+#
+#     def __init__(self, holder, balance=0):
+#         BankAccount.total_accounts += 1
+#         self.holder  = holder
+#         self.balance = balance
+#
+#     def deposit(self, amount):
+#         self.balance += amount
+#         print(f"Deposited ₹{amount:,} → {self.holder}'s balance: ₹{self.balance:,}")
+#
+#     def withdraw(self, amount):
+#         if amount > self.balance:
+#             print(f"Insufficient funds (balance: ₹{self.balance:,})")
+#         else:
+#             self.balance -= amount
+#             print(f"Withdrew ₹{amount:,} → {self.holder}'s balance: ₹{self.balance:,}")
+#
+#     def display(self):
+#         print(f"{self.holder} | ₹{self.balance:,} | Bank: {BankAccount.bank_name}")
+#
+#     @classmethod
+#     def get_total(cls): return cls.total_accounts
+#
+#     def __str__(self): return f"Account[{self.holder}]: ₹{self.balance:,}"
+#
+# a1 = BankAccount("Snehith", 15000)
+# a2 = BankAccount("Priya", 10000)
+# a3 = BankAccount("Raj", 500)
+# a1.deposit(5000); a2.withdraw(2000); a3.withdraw(1000)
+# print(f"Total accounts: {BankAccount.get_total()}")
+# BankAccount.bank_name = "NewBank"
+# for a in [a1,a2,a3]: a.display()
+

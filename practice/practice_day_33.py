@@ -181,6 +181,90 @@ with open("test_q8.txt", "r") as f:
 # YOUR CODE HERE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which mode opens a file for READING only?
+#    A) "w"    B) "r"    C) "a"    D) "x"
+# Answer: ___
+
+# Q_MCQ_2. What does  open("file.txt", "w")  do if the file already exists?
+#    A) Appends to it    B) Raises FileExistsError
+#    C) Truncates (overwrites) it    D) Opens in read mode
+# Answer: ___
+
+# Q_MCQ_3. What is the advantage of using  with open(...) as f:  ?
+#    A) Faster file I/O    B) Auto-closes the file on exit
+#    C) Works on binary files only    D) Avoids ImportError
+# Answer: ___
+
+# Q_MCQ_4. f.readlines()  returns:
+#    A) A single string    B) A list of lines (with \n)
+#    C) A generator    D) The number of lines
+# Answer: ___
+
+# Q_MCQ_5. Which mode APPENDS to an existing file (creates if missing)?
+#    A) "r"    B) "w"    C) "a"    D) "x"
+# Answer: ___
+
+# Q_MCQ_6. To write multiple lines at once use:
+#    A) f.write()    B) f.writelines()    C) f.puts()    D) f.dump()
+# Answer: ___
+
+# Q_MCQ_7. After reading a file, calling  f.read()  again returns:
+#    A) The same content    B) An empty string (cursor at end)
+#    C) FileNotFoundError    D) None
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. The default mode for  open()  is _______.
+
+# FIB_2. To read the entire file as one string: f._______.
+
+# FIB_3. with open("data.txt", "a") as f:  opens in _______ mode.
+
+# FIB_4. Each string in the list returned by  readlines()  ends with _______.
+
+# FIB_5. The  with  statement calls  f._______()  automatically on exit.
+
+# FIB_6. To write a string to a file: f._______("Hello\n").
+
+# FIB_7. Opening a file with mode "r" and the file does not exist raises
+#         _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Build a Personal Diary App that reads and writes diary entries.
+#
+# Requirements:
+#   1. Append a new diary entry to "diary.txt" (date + text, one per run)
+#   2. Read and display ALL past entries from the file
+#   3. Count total number of entries
+#   4. Use  with  statement for all file operations
+#   5. Handle FileNotFoundError gracefully if diary.txt does not exist yet
+#   6. Strip trailing whitespace when displaying entries
+#
+# Expected output (2nd run after first entry):
+#   === Your Diary ===
+#   Entry 1: 2024-01-15 | Today I learned file handling!
+#   Entry 2: 2024-01-16 | Files make data persistent!
+#   Total entries: 2
+#   New entry saved for 2024-01-16.
+#
+# Hint: Use datetime.date.today() for the date.
+#       Write each entry as: "YYYY-MM-DD | text\n"
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -210,3 +294,43 @@ with open("test_q8.txt", "r") as f:
 # BONUS 1: ValueError: I/O operation on closed file
 
 # BONUS 2: 'Line A\nLine B\nLine C\n', '' (empty string at EOF), '' (at EOF)
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: "r"  (read mode)
+# FIB_2: read()
+# FIB_3: append
+# FIB_4: \n  (newline character)
+# FIB_5: close
+# FIB_6: write
+# FIB_7: FileNotFoundError
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# from datetime import date
+# DIARY = "diary.txt"
+#
+# def read_diary():
+#     try:
+#         with open(DIARY, "r") as f:
+#             lines = [l.rstrip() for l in f.readlines()]
+#         print("=== Your Diary ===")
+#         for i, line in enumerate(lines, 1):
+#             print(f"Entry {i}: {line}")
+#         print(f"Total entries: {len(lines)}")
+#         return len(lines)
+#     except FileNotFoundError:
+#         print("No diary found. Starting fresh!")
+#         return 0
+#
+# def write_entry(text):
+#     entry = f"{date.today()} | {text}"
+#     with open(DIARY, "a") as f:
+#         f.write(entry + "\n")
+#     print(f"New entry saved for {date.today()}.")
+#
+# read_diary()
+# write_entry("Today I practiced file handling!")
+

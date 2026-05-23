@@ -256,6 +256,104 @@ print(L2)   # deep — affected?
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does  [3,1,2].sort()  return?
+#    A) [1,2,3]    B) None (sorts in-place)    C) [3,1,2]    D) Error
+# Answer: ___
+
+# Q_MCQ_2. How do you sort a list in DESCENDING order?
+#    A) list.sort()               B) list.sort(reverse=True)
+#    C) sorted(list, asc=False)   D) list.reverse()
+# Answer: ___
+
+# Q_MCQ_3. What is the difference between shallow copy and deep copy?
+#    A) No difference — both copy everything
+#    B) Shallow copies nested objects by reference; deep copy creates
+#       completely independent copies including nested objects
+#    C) Deep copy is slower but both behave the same
+#    D) Shallow copy is for lists; deep copy is for dicts
+# Answer: ___
+
+# Q_MCQ_4. Which creates a list of squares: [0,1,4,9,16]?
+#    A) [x**2 in range(5)]        B) [x**2 for x in range(5)]
+#    C) list(x**2 for x in 5)     D) [x*x, range(5)]
+# Answer: ___
+
+# Q_MCQ_5. What does  tuple("abc")  produce?
+#    A) ("abc",)    B) ('a','b','c')    C) Error    D) ["a","b","c"]
+# Answer: ___
+
+# Q_MCQ_6. Can you sort a tuple directly?
+#    A) Yes, tuple.sort() works       B) No — tuples are immutable;
+#       use sorted() which returns a new list
+#    C) Yes with tuple.sorted()       D) No, you can never sort a tuple's content
+# Answer: ___
+
+# Q_MCQ_7. import copy; b = copy.copy(a)  — if  a = [[1,2],[3,4]]:
+#           b[0][0] = 99.  What happens to  a[0][0]?
+#    A) Stays 1          B) Becomes 99 — shallow copy shares inner lists
+#    C) Raises TypeError D) a becomes None
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. sorted([5,2,8,1]) returns _______ and the original list is _______.
+
+# FIB_2. list.sort() returns _______ (it modifies the list _______ ).
+
+# FIB_3. To sort by length:  sorted(words, key=_______).
+
+# FIB_4. copy.deepcopy() is imported from the _______ module.
+
+# FIB_5. [x*2 for x in [1,2,3] if x > 1]  = _______.
+
+# FIB_6. A tuple with ONE element looks like: (42,)  — the _______ is required.
+
+# FIB_7. list(range(5)) = _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Student Grade Manager for a school system.
+#
+# Requirements:
+#   1. Start with a list of (student_name, score) tuples (5 students)
+#   2. Sort by score DESCENDING using sorted() with key=lambda — do NOT
+#      modify the original list
+#   3. Print the leaderboard (rank, name, score)
+#   4. List comprehension: extract names of students who passed (score >= 50)
+#   5. List comprehension: create "grade letter" list
+#      (A≥90, B≥75, C≥60, else F)
+#   6. Deep copy the sorted list; modify the copy's first student's score
+#      to 0. Prove the original is unchanged.
+#   7. Calculate and print: class average, highest, lowest
+#
+# Expected output:
+#   === Leaderboard ===
+#   1. Priya    : 95
+#   2. Snehith  : 88
+#   3. Aarav    : 74
+#   4. Meena    : 61
+#   5. Rohan    : 43
+#   Passed: ['Priya', 'Snehith', 'Aarav', 'Meena']
+#   Grades: ['A', 'B', 'C', 'C', 'F']
+#   Average: 72.2 | Highest: 95 | Lowest: 43
+#   (Deep copy modified — original first score still: 95)
+#
+# Hint: key=lambda x: x[1] extracts the score from each (name,score) tuple.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -293,3 +391,36 @@ print(L2)   # deep — affected?
 # Q17: ('P','y','t','h','o','n'), (1,2,3,4), [10,20,30]
 
 # BONUS 3: L=[1,2,3,4,5,6,9]; L1=[1,2,3,4,5,6,9] (shallow, same object); L2=[3,1,4,1,5,9,2,6] (deep, unaffected)
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: [1,2,5,8];  unchanged
+# FIB_2: None;  in-place
+# FIB_3: key=len
+# FIB_4: copy
+# FIB_5: [4, 6]
+# FIB_6: trailing comma
+# FIB_7: [0, 1, 2, 3, 4]
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import copy
+# students = [("Priya",95),("Snehith",88),("Aarav",74),("Meena",61),("Rohan",43)]
+# ranked = sorted(students, key=lambda x: x[1], reverse=True)
+# print("=== Leaderboard ===")
+# for i,(name,score) in enumerate(ranked,1):
+#     print(f"{i}. {name:<8}: {score}")
+# passed = [n for n,s in ranked if s >= 50]
+# print(f"Passed: {passed}")
+# grade = lambda s: 'A' if s>=90 else 'B' if s>=75 else 'C' if s>=60 else 'F'
+# grades = [grade(s) for _,s in ranked]
+# print(f"Grades: {grades}")
+# scores = [s for _,s in students]
+# print(f"Average: {sum(scores)/len(scores):.1f} | Highest: {max(scores)} | Lowest: {min(scores)}")
+# ranked_copy = copy.deepcopy(ranked)
+# ranked_copy[0] = (ranked_copy[0][0], 0)
+# print(f"(Deep copy modified — original first score still: {ranked[0][1]})")
+

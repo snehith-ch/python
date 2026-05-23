@@ -208,6 +208,100 @@ print(divide(10, 0))     # prediction:
 # YOUR ANSWERS:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What file makes a directory a Python package?
+#    A) main.py    B) __init__.py    C) setup.py    D) package.py
+# Answer: ___
+
+# Q_MCQ_2. from math import sqrt  — which import style is this?
+#    A) import module    B) import module as alias
+#    C) from module import name    D) from module import *
+# Answer: ___
+
+# Q_MCQ_3. import numpy as np  — what does  as np  do?
+#    A) Renames the module permanently
+#    B) Creates a local alias for the module in this script
+#    C) Installs numpy with alias np
+#    D) Imports only np from numpy
+# Answer: ___
+
+# Q_MCQ_4. from os.path import join, exists  imports:
+#    A) The entire os module    B) join and exists functions specifically
+#    C) os and path separately    D) Everything from os
+# Answer: ___
+
+# Q_MCQ_5. A package can contain:
+#    A) Only .py files    B) Only __init__.py
+#    C) Sub-packages and modules    D) Only one module
+# Answer: ___
+
+# Q_MCQ_6. What is the role of  __init__.py  in a package?
+#    A) Runs tests automatically
+#    B) Marks the directory as a package; can expose public API
+#    C) Installs the package
+#    D) Required only for third-party packages
+# Answer: ___
+
+# Q_MCQ_7. Which import style should be AVOIDED in production code?
+#    A) import math    B) from math import sqrt
+#    C) from math import *    D) import math as m
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. A Python package is a directory containing a special file named
+#         _______.
+
+# FIB_2. import pandas as pd  — pd is called a module _______.
+
+# FIB_3. from mypackage.utils import helper  imports  helper  from the
+#         _______ module inside mypackage.
+
+# FIB_4. from os import *  imports _______ names from the os module
+#         (this style pollutes the _______ namespace).
+
+# FIB_5. The  sys.path  list tells Python where to _______ modules.
+
+# FIB_6. pip install requests  installs a _______ package into site-packages.
+
+# FIB_7. Relative import syntax (inside a package): from ._______  import func
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Build a Calculator Package with sub-modules.
+#
+# Requirements:
+#   1. Create a package folder: mymath/
+#      - mymath/__init__.py  (expose: add, sub, mul, div, circle_area)
+#      - mymath/basic.py     (add, sub, mul, div functions)
+#      - mymath/geometry.py  (circle_area, rect_area functions)
+#   2. In a main script, import using 3 styles:
+#      - import mymath
+#      - from mymath import circle_area
+#      - from mymath.basic import mul
+#   3. Use each import style to compute something and print results
+#   4. Print the package's __doc__ (docstring from __init__.py)
+#
+# Expected output:
+#   mymath package: Math utilities — basic and geometry
+#   add(10, 5) = 15        (via import mymath)
+#   circle_area(7) = 153.94  (via from mymath import)
+#   mul(4, 6) = 24          (via from mymath.basic import)
+#
+# Hint: Set __doc__ in __init__.py as a module docstring.
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -236,3 +330,44 @@ print(divide(10, 0))     # prediction:
 #     e) True (module names are per-package)
 
 # Q10: 13, 7, 30, 3.333..., None
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: C
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: __init__.py
+# FIB_2: alias
+# FIB_3: utils
+# FIB_4: all public; global
+# FIB_5: search / look up
+# FIB_6: third-party
+# FIB_7: . (current package) — e.g. from .utils import helper
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# # mymath/__init__.py
+# "Math utilities -- basic and geometry"
+# from .basic import add, sub, mul, div
+# from .geometry import circle_area, rect_area
+#
+# # mymath/basic.py
+# def add(a, b): return a + b
+# def sub(a, b): return a - b
+# def mul(a, b): return a * b
+# def div(a, b): return a / b if b != 0 else None
+#
+# # mymath/geometry.py
+# import math
+# def circle_area(r): return round(math.pi * r * r, 2)
+# def rect_area(l, w): return l * w
+#
+# # main.py (run from directory containing mymath/)
+# import mymath
+# from mymath import circle_area
+# from mymath.basic import mul
+#
+# print(f"mymath package: {mymath.__doc__}")
+# print(f"add(10, 5)      = {mymath.add(10, 5)}")
+# print(f"circle_area(7)  = {circle_area(7)}")
+# print(f"mul(4, 6)       = {mul(4, 6)}")
+

@@ -171,6 +171,100 @@ print(a.mean())    # prediction:
 print(a.sum())     # prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. The main difference between a Python list and an array (array module):
+#    A) List can have one type; array can have multiple
+#    B) Array stores one data type; list can store any types
+#    C) Array is faster for string operations
+#    D) They are identical in every way
+# Answer: ___
+
+# Q_MCQ_2. np.zeros((2, 3))  creates:
+#    A) A 2D array with 2 rows and 3 columns of zeros
+#    B) A 1D array of 6 zeros
+#    C) An array from 0 to 2 with step 3
+#    D) Error — zeros() takes only one argument
+# Answer: ___
+
+# Q_MCQ_3. np.arange(1, 10, 2)  produces:
+#    A) [1,3,5,7,9]    B) [1,2,...,10]    C) [2,4,6,8,10]    D) [1,10,2]
+# Answer: ___
+
+# Q_MCQ_4. arr = np.array([[1,2],[3,4]]); arr.shape  returns:
+#    A) 4    B) (2, 2)    C) [2, 2]    D) (4,)
+# Answer: ___
+
+# Q_MCQ_5. np.array([1,2,3]) * 2  returns:
+#    A) [1,2,3,1,2,3]    B) [2,4,6]    C) 12    D) Error
+# Answer: ___
+
+# Q_MCQ_6. arr[1, 2]  in a 2D NumPy array accesses:
+#    A) Row 2, Column 3    B) Row 1, Column 2
+#    C) Row 2, Column 1    D) Element at flat index 5
+# Answer: ___
+
+# Q_MCQ_7. np.array([1, 2, 3]).dtype  for integer input returns:
+#    A) 'int'    B) 'int64' (or int32 depending on system)
+#    C) 'float64'    D) 'object'
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. np.arange(0, 10, 3) = _______.
+
+# FIB_2. np.zeros((3,4)).shape = _______  and .size = _______.
+
+# FIB_3. arr.ndim  for a 2D array returns _______.
+
+# FIB_4. arr.sum(axis=0) computes sum _______, axis=1 computes sum _______.
+
+# FIB_5. array('d', [1.5, 2.5]) stores _______ floats (type code 'd' = double).
+
+# FIB_6. arr.reshape(2, 6)  changes a (3,4) array to _______ — total elements must be _______.
+
+# FIB_7. arr[arr > 5]  is called _______ indexing in NumPy.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Student Marks Analyzer using NumPy — batch statistics.
+#
+# Requirements:
+#   1. Create a 5×4 array (5 students, 4 subjects) using:
+#      np.random.seed(42); marks = np.random.randint(40, 100, (5, 4))
+#   2. Print: shape, size, ndim, dtype
+#   3. Row-wise total (sum per student) using axis=1
+#   4. Column-wise average (avg per subject) using axis=0  
+#   5. Overall highest and lowest mark
+#   6. Boolean indexing: find all marks ≥ 80 (print as a flat array)
+#   7. Count how many marks are below 60 (failing)
+#   8. Reshape the 5×4 array to 4×5 — print new shape
+#   9. Print a nicely formatted report table
+#      Subjects: Math, Science, English, History
+#
+# Expected output (partial, values depend on seed):
+#   Marks Array (5 students × 4 subjects):
+#   [[...]]
+#   Shape: (5,4)  Size: 20  Dimensions: 2
+#   Student totals: [...]
+#   Subject averages: [...]
+#   Highest: 99  Lowest: 41
+#   Marks ≥ 80: [...]
+#   Failing (<60): X students
+#   Reshaped to (4,5): shape = (4, 5)
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -204,3 +298,37 @@ print(a.sum())     # prediction:
 #       np array + np array → [2 4 6] (element-wise)
 
 # BONUS 3: 9, 1, 3.875, 31
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: A   Q_MCQ_3: A   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: [0, 3, 6, 9]
+# FIB_2: (3,4);  12
+# FIB_3: 2
+# FIB_4: column-wise (for each column);  row-wise (for each row)
+# FIB_5: double-precision (64-bit)
+# FIB_6: (2,6);  equal (12 in both)
+# FIB_7: boolean
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import numpy as np
+# np.random.seed(42)
+# marks = np.random.randint(40, 100, (5, 4))
+# subjects = ["Math","Science","English","History"]
+# names    = ["Alice","Bob","Priya","Raj","Meena"]
+# print("Marks Array (5 students × 4 subjects):")
+# print(marks)
+# print(f"Shape: {marks.shape}  Size: {marks.size}  Dimensions: {marks.ndim}  Dtype: {marks.dtype}")
+# totals  = marks.sum(axis=1)
+# avgs    = marks.mean(axis=0)
+# print(f"Student totals: {totals}")
+# print(f"Subject averages: {avgs.round(1)}")
+# print(f"Highest: {marks.max()}  Lowest: {marks.min()}")
+# print(f"Marks ≥ 80: {marks[marks >= 80]}")
+# failing = (marks < 60).sum()
+# print(f"Failing (<60): {failing} marks")
+# print(f"Reshaped to (4,5): shape = {marks.reshape(4,5).shape}")
+

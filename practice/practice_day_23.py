@@ -184,6 +184,106 @@ print(t.log)     # prediction:
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. When you write  obj.display(), Python automatically passes:
+#    A) The class    B) The object as self    C) None    D) The module
+# Answer: ___
+
+# Q_MCQ_2. Two objects of the same class:
+#    A) Share all instance variables    B) Each have their own instance variables
+#    C) Must have different method names    D) Cannot exist simultaneously
+# Answer: ___
+
+# Q_MCQ_3. __str__(self)  should return:
+#    A) None    B) A printable string representation of the object
+#    C) The class name    D) The memory address
+# Answer: ___
+
+# Q_MCQ_4. Which output format uses placeholders like %s and %d?
+#    A) f-string          B) .format() method
+#    C) % formatting      D) print() default
+# Answer: ___
+
+# Q_MCQ_5. Defining a method OUTSIDE the class body (then assigning it)
+#           works in Python — what is this called?
+#    A) Monkey patching    B) Inheritance    C) Encapsulation    D) Abstraction
+# Answer: ___
+
+# Q_MCQ_6. What is the purpose of a separate display() method vs __str__?
+#    A) display() can have complex logic, printing side effects;
+#       __str__ just returns a string for str()/print() integration
+#    B) No difference
+#    C) __str__ is faster
+#    D) display() is for subclasses only
+# Answer: ___
+
+# Q_MCQ_7. obj1 = Employee(1, "Alice"); obj2 = Employee(2, "Bob")
+#           obj2.salary = 50000  — does this affect obj1?
+#    A) Yes    B) No — obj2.salary is an instance variable for obj2 only
+#    C) Only if salary is a class variable    D) Yes, if both were created from same class
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. self always refers to the _______ that called the method.
+
+# FIB_2. __str__ is called when you use _______ or _______ on an object.
+
+# FIB_3. f"Name: {self.name}" is an _______ string (introduced in Python 3.6).
+
+# FIB_4. Two objects created from the same class share the _______ (methods,
+#         class variables) but have separate _______ variables.
+
+# FIB_5. obj.display()  is syntactic sugar for  _______.display(obj).
+
+# FIB_6. To define a method that operates on an instance: the first parameter
+#         must be _______.
+
+# FIB_7. "%-10s" % name  prints name _______ in a 10-character wide field.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Employee Directory for an HR system.
+#
+# Requirements:
+#   Define  Employee  class with:
+#   - __init__(emp_id, name, department, salary)
+#   - display(): print a formatted employee card (borders + aligned fields)
+#   - give_raise(percent): update salary, print "Salary: old → new"
+#   - promote(new_dept): update department, print "Promoted to: new_dept"
+#   - __str__: returns "EmpID:{id} | {name} | {dept} | ₹{salary:,}"
+#
+#   Then:
+#   1. Create 4 employees in different departments
+#   2. Give a 15% raise to Employee 1
+#   3. Promote Employee 3 to "Engineering"
+#   4. Print all employees using display()
+#   5. Print all using str() to demonstrate __str__
+#   6. Show that modifying one employee does NOT affect others
+#
+# Expected output (partial):
+#   ╔════════════════════════════╗
+#   ║ EmpID: E001               ║
+#   ║ Name  : Alice Kumar       ║
+#   ║ Dept  : Marketing         ║
+#   ║ Salary: ₹45,000           ║
+#   ╚════════════════════════════╝
+#   Salary raised: ₹45,000 → ₹51,750
+#   Promoted to: Engineering
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -203,3 +303,55 @@ print(t.log)     # prediction:
 # Q7: 18, 4
 
 # BONUS 1: ['start', 'login', 'logout']
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: A   Q_MCQ_6: A   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: object (instance)
+# FIB_2: str();  print()
+# FIB_3: f-string
+# FIB_4: class structure (methods, class vars);  instance
+# FIB_5: ClassName
+# FIB_6: self
+# FIB_7: left-aligned
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# class Employee:
+#     def __init__(self, emp_id, name, department, salary):
+#         self.emp_id     = emp_id
+#         self.name       = name
+#         self.department = department
+#         self.salary     = salary
+#
+#     def display(self):
+#         w = 30
+#         print("╔" + "═"*w + "╗")
+#         print(f"║ EmpID : {self.emp_id:<{w-9}}║")
+#         print(f"║ Name  : {self.name:<{w-9}}║")
+#         print(f"║ Dept  : {self.department:<{w-9}}║")
+#         print(f"║ Salary: ₹{self.salary:<{w-10},}║")
+#         print("╚" + "═"*w + "╝")
+#
+#     def give_raise(self, percent):
+#         old = self.salary
+#         self.salary = int(old * (1 + percent/100))
+#         print(f"Salary raised: ₹{old:,} → ₹{self.salary:,}")
+#
+#     def promote(self, new_dept):
+#         self.department = new_dept
+#         print(f"Promoted to: {new_dept}")
+#
+#     def __str__(self):
+#         return f"EmpID:{self.emp_id} | {self.name} | {self.department} | ₹{self.salary:,}"
+#
+# e1 = Employee("E001","Alice Kumar","Marketing",45000)
+# e2 = Employee("E002","Bob Singh","Finance",55000)
+# e3 = Employee("E003","Priya Rao","HR",48000)
+# e4 = Employee("E004","Raj Patel","Sales",42000)
+# e1.give_raise(15); e3.promote("Engineering")
+# for e in [e1,e2,e3,e4]: e.display()
+# for e in [e1,e2,e3,e4]: print(str(e))
+

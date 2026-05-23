@@ -263,6 +263,101 @@ print(randint(1, 1))           # prediction:
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. math.ceil(3.2)  returns:
+#    A) 3    B) 3.2    C) 4    D) 3.0
+# Answer: ___
+
+# Q_MCQ_2. datetime.date.today()  vs  datetime.datetime.now():
+#    A) They return the same thing
+#    B) date.today() returns only the date; datetime.now() returns date+time
+#    C) datetime.now() returns only time
+#    D) date.today() returns a string; datetime.now() returns a datetime object
+# Answer: ___
+
+# Q_MCQ_3. random.seed(42) ensures:
+#    A) Only the number 42 is generated
+#    B) The same sequence of random numbers every run
+#    C) Numbers are sorted    D) Numbers are between 0 and 42
+# Answer: ___
+
+# Q_MCQ_4. calendar.isleap(2024)  returns:
+#    A) False    B) True    C) 2024    D) Error
+# Answer: ___
+
+# Q_MCQ_5. The array module type code for a signed integer array is:
+#    A) 'f'    B) 'd'    C) 'i'    D) 's'
+# Answer: ___
+
+# Q_MCQ_6. math.log(100, 10)  returns:
+#    A) 10    B) 2.0    C) 1000    D) 0.01
+# Answer: ___
+
+# Q_MCQ_7. random.choice([10,20,30])  returns:
+#    A) A random index    B) One randomly selected element
+#    C) All elements shuffled    D) The first element always
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. math.pi ≈ _______.
+
+# FIB_2. math.floor(-3.2) = _______ (floor rounds towards _______).
+
+# FIB_3. datetime.date.today() returns an object of type _______.
+
+# FIB_4. random.randint(1, 6) simulates rolling a _______.
+
+# FIB_5. calendar.month(2024, 3) prints the calendar for _______ 2024.
+
+# FIB_6. array('i', [1,2,3]) creates an array of _______ integers.
+
+# FIB_7. math.factorial(5) = _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Daily Life Stats Tracker using ALL built-in modules.
+#
+# Requirements:
+#   1. math module:
+#      - Compound interest: A = P*(1+r/n)^(n*t)
+#        Use P=10000, r=0.08, n=12, t=5
+#      - Print: principal, rate, final amount, interest earned
+#   2. datetime module:
+#      - Calculate age in days (use DOB = date(2000, 1, 15))
+#      - Print today's date formatted as "Day Month Year"
+#   3. calendar module:
+#      - Print whether current year is a leap year
+#      - Print the text calendar for current month
+#   4. random module:
+#      - Simulate rolling two dice 1000 times (use seed=42)
+#      - Count how many times you get "double six" (both dice = 6)
+#   5. array module:
+#      - Store 7 temperatures as float array: [36.5,37.1,36.8,38.2,37.5,36.9,37.3]
+#      - Calculate average WITHOUT using sum() — use a loop
+#
+# Expected output (partial):
+#   === Compound Interest ===
+#   Principal: ₹10,000 | Rate: 8% | Time: 5 yrs
+#   Final Amount: ₹14,898.46 | Interest: ₹4,898.46
+#   === Age Stats ===
+#   DOB: 2000-01-15 | Age: ~8,900 days
+#   === Random Dice ===
+#   Double six in 1000 rolls: ~28 times (expected ≈27.8)
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -292,3 +387,50 @@ print(randint(1, 1))           # prediction:
 # Q17: <class 'array.array'>, array('i',[10,20,30,40,50]), 10, 50, 5
 
 # BONUS 3: 4, 2, current year, any one of the 3 strings, 1
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 3.141592653589793
+# FIB_2: -4;  negative infinity
+# FIB_3: datetime.date
+# FIB_4: standard six-sided die
+# FIB_5: March
+# FIB_6: signed (regular) integers
+# FIB_7: 120
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import math, calendar, random, array
+# from datetime import date
+#
+# print("=== Compound Interest ===")
+# P,r,n,t = 10000, 0.08, 12, 5
+# A = P * (1 + r/n) ** (n*t)
+# print(f"Principal: ₹{P:,} | Rate: {r*100:.0f}% | Time: {t} yrs")
+# print(f"Final Amount: ₹{A:,.2f} | Interest: ₹{A-P:,.2f}")
+#
+# print("=== Age Stats ===")
+# dob   = date(2000, 1, 15)
+# today = date.today()
+# print(f"DOB: {dob} | Age: {(today-dob).days:,} days")
+# print(f"Today formatted: {today.strftime('%d %B %Y')}")
+#
+# print("=== Calendar ===")
+# yr = today.year
+# print(f"{yr} is {'a leap' if calendar.isleap(yr) else 'not a leap'} year")
+# print(calendar.month(yr, today.month))
+#
+# print("=== Random Dice ===")
+# random.seed(42)
+# double_six = sum(1 for _ in range(1000) if random.randint(1,6)==6 and random.randint(1,6)==6)
+# print(f"Double six in 1000 rolls: {double_six} times")
+#
+# print("=== Array Temperatures ===")
+# temps = array.array('f', [36.5,37.1,36.8,38.2,37.5,36.9,37.3])
+# total = 0
+# for t in temps: total += t
+# print(f"7-day avg temperature: {total/len(temps):.2f}°C")
+

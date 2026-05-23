@@ -231,6 +231,102 @@ print("Python 123".isalnum())
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does  "  hello  ".strip()  return?
+#    A) "  hello  "    B) "hello"    C) "hello  "    D) "  hello"
+# Answer: ___
+
+# Q_MCQ_2. What does  list.append(x)  return?
+#    A) The updated list    B) x    C) None    D) The index of x
+# Answer: ___
+
+# Q_MCQ_3. What is the difference between  find()  and  index()?
+#    A) No difference
+#    B) find() raises ValueError if not found; index() returns -1
+#    C) index() raises ValueError if not found; find() returns -1
+#    D) find() is for lists; index() is for strings
+# Answer: ___
+
+# Q_MCQ_4. list.pop()  with no argument removes:
+#    A) The first element    B) The last element
+#    C) All elements         D) A random element
+# Answer: ___
+
+# Q_MCQ_5. "hello world".split("o")  returns:
+#    A) ['hello', 'world']    B) ['hell', ' w', 'rld']
+#    C) ['helloworld']        D) Error
+# Answer: ___
+
+# Q_MCQ_6. list.sort()  vs  sorted(list):
+#    A) Both return a new sorted list
+#    B) sort() modifies in-place (returns None); sorted() returns new list
+#    C) sorted() modifies in-place; sort() returns new list
+#    D) They are identical in every way
+# Answer: ___
+
+# Q_MCQ_7. "racecar".lstrip("r")  returns:
+#    A) "acecar"    B) "aceca"    C) "racecar"    D) "acecar" — strips all 'r's from left
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. "***hello***".strip("*") = _______.
+
+# FIB_2. "hello world".find("world") returns _______ (the start index).
+
+# FIB_3. [1, 2, 3].insert(1, 99) makes the list _______.
+
+# FIB_4. [10, 20, 30].pop(0) returns _______ and leaves _______.
+
+# FIB_5. "hello".replace("l", "r") = _______.
+
+# FIB_6. "a,b,c".split(",") = _______.
+
+# FIB_7. lstrip() strips from the _______ side; rstrip() from the _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Text Message Cleaner & Analyzer for a chat application.
+# The app receives messy user messages that need cleaning and analysis.
+#
+# Raw message (copy this exactly):
+#   raw = "  *** Hello   Python   World!  I love python.  ***   "
+#
+# Requirements:
+#   1. Strip leading/trailing spaces AND * characters
+#   2. Squeeze multiple spaces into one (hint: split() then join)
+#   3. Convert to title case
+#   4. Count how many times "python" appears (case-insensitive)
+#   5. Replace "python" (any case) with "Python 🐍"
+#   6. Split into individual words; print word count
+#   7. Check if message starts with "Hello" and ends with "."
+#   8. Find the index of "World" in the cleaned message
+#
+# Expected output (approximate):
+#   Raw      : "  *** Hello   Python   World!  I love python.  ***   "
+#   Stripped : "Hello   Python   World!  I love python."
+#   Cleaned  : "Hello Python World! I Love Python."
+#   "python" count (original, case-insensitive): 2
+#   After replace: "Hello Python 🐍 World! I Love Python 🐍."
+#   Word count : 8
+#   Starts with 'Hello': True
+#   Index of 'World': 14
+#
+# Hint: strip("* ") strips both spaces AND asterisks in one call.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -268,3 +364,36 @@ print("Python 123".isalnum())
 # BONUS 3:
 # 22 (with spaces), "Python Programming", 20, 9, ('  ', 'P', 'ython Programming  ')
 # True, True, False (space makes it fail isalnum)
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: C   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: A
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: "hello"
+# FIB_2: 6
+# FIB_3: [1, 99, 2, 3]
+# FIB_4: 10;  [20, 30]
+# FIB_5: "herro"
+# FIB_6: ['a', 'b', 'c']
+# FIB_7: left;  right
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# raw = "  *** Hello   Python   World!  I love python.  ***   "
+# print(f'Raw      : "{raw}"')
+# stripped = raw.strip("* ").strip()
+# print(f'Stripped : "{stripped}"')
+# cleaned = " ".join(stripped.split()).title()
+# print(f'Cleaned  : "{cleaned}"')
+# count = stripped.lower().count("python")
+# print(f'"python" count (original, case-insensitive): {count}')
+# import re
+# replaced = re.sub(r'python', 'Python 🐍', cleaned, flags=re.IGNORECASE)
+# print(f'After replace: "{replaced}"')
+# words = cleaned.split()
+# print(f'Word count : {len(words)}')
+# print(f"Starts with 'Hello': {cleaned.startswith('Hello')}")
+# idx = cleaned.find("World")
+# print(f"Index of 'World': {idx}")
+

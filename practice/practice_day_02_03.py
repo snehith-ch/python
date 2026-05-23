@@ -100,6 +100,103 @@ import sys
 print("Python version:", sys.version)
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Running the same .py file on Windows, Linux, macOS
+#           without changes describes Python as:
+#    A) Portable          B) Platform Independent
+#    C) Extensible        D) High Level
+# Answer: ___
+
+# Q_MCQ_2. "Python can use C/C++ code inside it" → which feature?
+#    A) Free & Open Source  B) Simple
+#    C) Extensible          D) Dynamically Typed
+# Answer: ___
+
+# Q_MCQ_3. The critical checkbox during Python installation:
+#    A) "Install for all users"    B) "Add Python to PATH"
+#    C) "Install IDLE"             D) "Install pip only"
+# Answer: ___
+
+# Q_MCQ_4. IDLE stands for:
+#    A) Integrated Development and Learning Environment
+#    B) Interactive Dynamic Language Editor
+#    C) Interpreted Data Layout Engine
+#    D) Inline Debugger for Lazy Execution
+# Answer: ___
+
+# Q_MCQ_5. Which PyCharm edition is completely free?
+#    A) Professional   B) Enterprise   C) Community   D) Academic
+# Answer: ___
+
+# Q_MCQ_6. In the IDLE interactive shell, do you need print()?
+#    A) Yes, always
+#    B) No — the shell auto-displays expression results
+#    C) Only for strings
+#    D) Only when running a script file
+# Answer: ___
+
+# Q_MCQ_7. "Data type assigned automatically at runtime" → which feature?
+#    A) High Level        B) Simple
+#    C) Extensible        D) Dynamically Typed
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. "No license required, source code freely available" →
+#         Python is ___________________.
+
+# FIB_2. "No need to manually manage memory" →
+#         Python is a _____________ level language.
+
+# FIB_3. Command to verify Python is installed: _____________.
+
+# FIB_4. pandas, numpy, matplotlib are examples of Python's
+#         _________________ standard libraries.
+
+# FIB_5. Moving the same program to a different OS and getting
+#         the same result = the _____________ feature.
+
+# FIB_6. Simple syntax that reads like English = the _____________ feature.
+
+# FIB_7. Every .py file is also called a _____________ in Python.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Write a single program that DEMONSTRATES all 4 key
+# Python features through running code.
+#
+# Requirements:
+#   1. Dynamic Typing — reassign x through int → float → str, print type()
+#   2. Huge Standard Library — import math, print math.pi and math.sqrt(144)
+#   3. Simple/Readable — clean if/else with a temperature check
+#   4. Interactive — input() to ask user's name and greet them
+#   Print a clear "--- Feature Name ---" header before each demo.
+#
+# Expected output (example):
+#   --- Dynamic Typing ---
+#   x = 42 → <class 'int'>   x = "hi" → <class 'str'>
+#   --- Standard Library ---
+#   pi = 3.141592653589793    sqrt(144) = 12.0
+#   --- Simple Syntax ---
+#   38°C: You have a fever!
+#   --- Interactive ---
+#   Hello, Snehith! Python is awesome.
+#
+# Hint: Each feature is shown by running actual code, not just printing text.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -142,3 +239,32 @@ print("Python version:", sys.version)
 # None       --> <class 'NoneType'>
 # hello      --> <class 'str'>
 # (2+3j)     --> <class 'complex'>
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: A
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: D
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: Free & Open Source
+# FIB_2: high
+# FIB_3: python --version
+# FIB_4: huge / large
+# FIB_5: Portable
+# FIB_6: Simple
+# FIB_7: module
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import math
+# print("--- Dynamic Typing ---")
+# x = 42;       print(f"x = 42 → {type(x)}", end="   ")
+# x = "hi";     print(f'x = "hi" → {type(x)}')
+# print("--- Standard Library ---")
+# print(f"pi = {math.pi}    sqrt(144) = {math.sqrt(144)}")
+# print("--- Simple Syntax ---")
+# temp = 38
+# print(f"{temp}°C: {'You have a fever!' if temp > 37 else 'Normal.'}")
+# print("--- Interactive ---")
+# name = input("Your name: ")
+# print(f"Hello, {name}! Python is awesome.")
+

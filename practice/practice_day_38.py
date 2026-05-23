@@ -241,6 +241,100 @@ print(high_earners)    # prediction:
 # YOUR COMPLETED TEMPLATE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which Python library is used to connect to SQL Server (MSSQL)?
+#    A) sqlite3    B) pymysql    C) pyodbc    D) psycopg2
+# Answer: ___
+
+# Q_MCQ_2. What does cursor.execute(sql) do?
+#    A) Fetches rows    B) Sends a SQL statement to the database
+#    C) Opens the connection    D) Closes the cursor
+# Answer: ___
+
+# Q_MCQ_3. cursor.fetchall()  returns:
+#    A) One row as a tuple    B) All rows as a list of tuples
+#    C) Column names only    D) The row count
+# Answer: ___
+
+# Q_MCQ_4. conn.commit()  is required after:
+#    A) SELECT queries    B) INSERT / UPDATE / DELETE queries
+#    C) Every execute()    D) Opening the connection
+# Answer: ___
+
+# Q_MCQ_5. Which function creates a database connection?
+#    A) cursor.connect()    B) pyodbc.connect()
+#    C) db.open()           D) sql.connect()
+# Answer: ___
+
+# Q_MCQ_6. cursor.fetchone()  returns:
+#    A) All rows    B) The first row only    C) Column headers    D) None always
+# Answer: ___
+
+# Q_MCQ_7. To use parameterized queries (avoid SQL injection), use:
+#    A) f-strings inside SQL    B) ? placeholders with a tuple of values
+#    C) String format()         D) Hardcoded values
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import _______ to connect to SQL Server from Python.
+
+# FIB_2. conn = pyodbc.connect(_______) — the argument is a _______ string.
+
+# FIB_3. After executing INSERT/UPDATE/DELETE you must call conn._______()
+#         to save changes.
+
+# FIB_4. cursor.execute("SELECT * FROM students WHERE id=?", (_______,))
+#         uses parameterized query to avoid SQL injection.
+
+# FIB_5. To get the column names from a cursor: [col[0] for col in
+#         cursor._______].
+
+# FIB_6. cursor.rowcount  gives the number of rows _______ by the last query.
+
+# FIB_7. Always close the connection with conn._______() when done.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Student Management System using a database.
+# (Use sqlite3 if MSSQL/pyodbc is not available — same CRUD concepts)
+#
+# Requirements:
+#   1. Connect to a SQLite database "students.db"
+#   2. Create table: Students(id INT PK, name TEXT, age INT, grade TEXT)
+#   3. INSERT 5 student records using parameterized queries
+#   4. SELECT and display all students
+#   5. UPDATE a student's grade by id
+#   6. DELETE a student by id
+#   7. SELECT again to verify the changes
+#   8. Close the connection properly
+#
+# Expected output:
+#   Table created.
+#   Inserted 5 students.
+#   === All Students ===
+#   1  Alice   20  A
+#   2  Bob     21  B
+#   ...
+#   Updated Bob's grade to A.
+#   Deleted student id=5.
+#   === After Changes ===
+#   1  Alice   20  A
+#   2  Bob     21  A
+#   ...
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -273,3 +367,45 @@ print(high_earners)    # prediction:
 # Q12: 3 rows printed: (1,'Sita','HYD',90000), (2,'Mohan','HYD',80000), (3,'Durga','HYD',45000)
 
 # Q13: All 3 rows; only rows with salary > 60000: [(1,'Sita','HYD',90000), (2,'Mohan','HYD',80000)]
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: pyodbc
+# FIB_2: connection string (DSN / driver info)
+# FIB_3: commit
+# FIB_4: the id value (e.g. 1)
+# FIB_5: description
+# FIB_6: affected
+# FIB_7: close
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import sqlite3
+# conn = sqlite3.connect("students.db")
+# cur = conn.cursor()
+# cur.execute("DROP TABLE IF EXISTS Students")
+# cur.execute("CREATE TABLE Students(id INT PRIMARY KEY, name TEXT, age INT, grade TEXT)")
+# conn.commit(); print("Table created.")
+#
+# students = [(1,"Alice",20,"A"),(2,"Bob",21,"B"),(3,"Carol",22,"A"),
+#             (4,"David",20,"C"),(5,"Eve",21,"B")]
+# cur.executemany("INSERT INTO Students VALUES (?,?,?,?)", students)
+# conn.commit(); print("Inserted 5 students.")
+#
+# print("=== All Students ===")
+# for row in cur.execute("SELECT * FROM Students"):
+#     print(*row)
+#
+# cur.execute("UPDATE Students SET grade=? WHERE id=?", ("A", 2))
+# conn.commit(); print("Updated Bob's grade to A.")
+#
+# cur.execute("DELETE FROM Students WHERE id=?", (5,))
+# conn.commit(); print("Deleted student id=5.")
+#
+# print("=== After Changes ===")
+# for row in cur.execute("SELECT * FROM Students"):
+#     print(*row)
+# conn.close()
+

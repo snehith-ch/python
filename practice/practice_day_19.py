@@ -250,6 +250,110 @@ print(m.course[:3])
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What does  import math as m  allow you to do?
+#    A) Use math functions without any prefix
+#    B) Use math functions with the shorter prefix m.
+#    C) Import only the math.m submodule
+#    D) Create a copy of the math module named m
+# Answer: ___
+
+# Q_MCQ_2. When you run a .py file directly, what is __name__?
+#    A) The filename    B) "__main__"    C) "__file__"    D) None
+# Answer: ___
+
+# Q_MCQ_3. What does  from math import *  do?
+#    A) Imports only math.sqrt
+#    B) Imports all public names from math into current namespace
+#    C) Imports math as a wildcard module
+#    D) Imports math and aliases it as *
+# Answer: ___
+
+# Q_MCQ_4. If two modules both define a function called  connect(),
+#           and you do  from db import *; from api import *  — which is used?
+#    A) db.connect()    B) api.connect() — the last import wins
+#    C) Both are available    D) Error — name conflict
+# Answer: ___
+
+# Q_MCQ_5. Modules are cached after first import. If you import the same
+#           module twice, Python:
+#    A) Executes the module code twice
+#    B) Uses the cached version — executes only once
+#    C) Raises ImportError the second time
+#    D) Creates two separate module objects
+# Answer: ___
+
+# Q_MCQ_6. if __name__ == "__main__":  is used to:
+#    A) Check if the file has a main() function
+#    B) Run code only when the file is executed directly, not when imported
+#    C) Define the main class
+#    D) Start the Python interpreter
+# Answer: ___
+
+# Q_MCQ_7. What does  import os; os.getcwd()  return?
+#    A) List of all files    B) Current working directory as a string
+#    C) Path to Python       D) Username
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import math as _______ is the common convention for the math module.
+
+# FIB_2. from os import _______ to get the current working directory function.
+
+# FIB_3. __name__ equals "_______ " when a file is run directly.
+
+# FIB_4. from math import pi, sqrt  makes pi and sqrt available
+#         _______ the math. prefix.
+
+# FIB_5. A _______ import conflict occurs when two modules define the same name.
+
+# FIB_6. import sys; sys.path  contains the list of directories Python searches
+#         for _______.
+
+# FIB_7. Every .py file is called a _______ in Python.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Data Science Toolkit Demo — use 4 modules with different
+# import styles to show you understand each style's implications.
+#
+# Requirements:
+#   1. import math  → use math.pi, math.sqrt(144), math.ceil(4.2), math.floor(4.8)
+#   2. import random as rnd  → rnd.seed(42), pick 5 numbers between 1-100,
+#      shuffle a list, choose one item
+#   3. from os import getcwd, listdir, path  → print cwd, check if
+#      "practice_day_19.py" exists in current dir
+#   4. from datetime import date, datetime  → print today's date,
+#      days until next New Year (Jan 1), format as "DD-Mon-YYYY"
+#   5. Print a clear header before each section
+#   6. At the BOTTOM: add  if __name__ == "__main__":  guard around
+#      all the demo code
+#
+# Expected output (example):
+#   === math module (import math) ===
+#   pi = 3.14159...   sqrt(144) = 12.0   ceil(4.2) = 5   floor(4.8) = 4
+#   === random module (import random as rnd) ===
+#   5 random numbers: [15, 72, 3, 94, 48]
+#   === os module (from os import ...) ===
+#   CWD: /home/snehith/python/practice
+#   File exists: True
+#   === datetime module (from datetime import ...) ===
+#   Today: 2024-01-15   Days to NY: 351   Formatted: 15-Jan-2024
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -283,3 +387,42 @@ print(m.course[:3])
 # [1, 4, 9, 16, 25]
 # "SNEHITH"
 # "Pyt"
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: m  (or any alias you prefer)
+# FIB_2: getcwd
+# FIB_3: __main__
+# FIB_4: without
+# FIB_5: name / namespace
+# FIB_6: modules
+# FIB_7: module
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import math
+# import random as rnd
+# from os import getcwd, listdir, path
+# from datetime import date, datetime
+#
+# if __name__ == "__main__":
+#     print("=== math module ===")
+#     print(f"pi={math.pi:.5f}  sqrt(144)={math.sqrt(144)}  ceil(4.2)={math.ceil(4.2)}  floor(4.8)={math.floor(4.8)}")
+#     print("=== random module ===")
+#     rnd.seed(42)
+#     nums = [rnd.randint(1,100) for _ in range(5)]
+#     items = ["apple","banana","cherry","date"]
+#     rnd.shuffle(items)
+#     print(f"5 random numbers: {nums}  |  shuffled: {items}  |  choice: {rnd.choice(items)}")
+#     print("=== os module ===")
+#     print(f"CWD: {getcwd()}")
+#     print(f"File exists: {path.exists('practice_day_19.py')}")
+#     print("=== datetime module ===")
+#     today = date.today()
+#     ny    = date(today.year+1, 1, 1)
+#     days  = (ny - today).days
+#     print(f"Today: {today}   Days to NY: {days}   Formatted: {today.strftime('%d-%b-%Y')}")
+

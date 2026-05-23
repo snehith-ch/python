@@ -219,6 +219,106 @@ print(issubclass(C, B))    # prediction:
 print(issubclass(B, A))    # prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. In single inheritance,  class Dog(Animal):  means:
+#    A) Dog is a parent of Animal    B) Dog inherits from Animal
+#    C) Dog and Animal are the same    D) Animal uses Dog's methods
+# Answer: ___
+
+# Q_MCQ_2. super().__init__()  inside a child class calls:
+#    A) The child's own __init__    B) The parent class's __init__
+#    C) The grandparent's __init__   D) Python's built-in init
+# Answer: ___
+
+# Q_MCQ_3. In multilevel inheritance A → B → C:
+#    A) C inherits from B only    B) C inherits from both A and B
+#    C) B and C are siblings      D) A inherits from C
+# Answer: ___
+
+# Q_MCQ_4. isinstance(dog_obj, Animal)  returns True if:
+#    A) dog_obj is exactly an Animal instance
+#    B) Dog is a subclass of Animal (inherited)
+#    C) Both A and B
+#    D) Only if Dog doesn't override any Animal methods
+# Answer: ___
+
+# Q_MCQ_5. Method overriding means:
+#    A) Adding a new method in child    B) Child redefines a method from parent
+#    C) Parent calls child's method     D) Removing a parent method
+# Answer: ___
+
+# Q_MCQ_6. Hierarchical inheritance means:
+#    A) One child, multiple parents    B) Multiple children inherit from one parent
+#    C) Children in a chain            D) All classes are siblings
+# Answer: ___
+
+# Q_MCQ_7. print(ClassName.__mro__)  shows:
+#    A) All attributes of the class    B) The Method Resolution Order (inheritance chain)
+#    C) All methods of the class       D) The class's module
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. class Child(Parent): — Child _______ all non-private methods from Parent.
+
+# FIB_2. super() refers to the _______ class in the MRO.
+
+# FIB_3. A → B → C (multilevel): C can access methods from _______ and _______.
+
+# FIB_4. If Dog overrides speak() from Animal, calling dog.speak() runs
+#         _______ speak() method.
+
+# FIB_5. issubclass(Dog, Animal)  returns _______ if Dog inherits Animal.
+
+# FIB_6. Hierarchical: Cat(Animal), Dog(Animal), Cow(Animal) — all three
+#         share _______ parent class.
+
+# FIB_7. To call the overridden parent method from child: use _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Animal Kingdom hierarchy with 3 inheritance types.
+#
+# Requirements:
+# Single:    Dog(Animal)
+# Multilevel: GoldenRetriever(Dog)
+# Hierarchical: Cat(Animal), Dog(Animal) — both inherit Animal
+#
+#   Animal: __init__(name, sound), speak(), __str__
+#   Dog(Animal): fetch(ball_name), override speak() → "Dog barks: {sound}"
+#   Cat(Animal): purr(), override speak() → "Cat meows: {sound}"
+#   GoldenRetriever(Dog): add color attribute, override fetch() with detail
+#
+# Demonstrate:
+#   1. Create one of each: Animal, Dog, Cat, GoldenRetriever
+#   2. Call speak() on all — show polymorphism
+#   3. GoldenRetriever can call both fetch() (from Dog) AND speak()
+#   4. isinstance(golden, Dog) → True, isinstance(golden, Animal) → True
+#   5. issubclass(GoldenRetriever, Animal) → True
+#   6. print(GoldenRetriever.__mro__)
+#
+# Expected output:
+#   Animal Crow: Crow says caw caw
+#   Dog Rex: Dog barks: woof
+#   Cat Whiskers: Cat meows: meow
+#   GoldenRetriever Buddy: Dog barks: woof (color: Golden)
+#   Buddy fetching tennis ball with enthusiasm!
+#   isinstance(buddy, Animal): True
+#   GoldenRetriever MRO: (<class GoldenRetriever>, <class Dog>, <class Animal>, ...)
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -240,3 +340,48 @@ print(issubclass(B, A))    # prediction:
 # BONUS 1: "Y.hello" (Y overrides X; Z inherits from Y), True, True
 
 # BONUS 2: True, False, True, True
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: C
+# Q_MCQ_5: B   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: inherits
+# FIB_2: next (immediate parent)
+# FIB_3: B and A (all ancestors)
+# FIB_4: Dog's (child's overridden)
+# FIB_5: True
+# FIB_6: one (Animal)
+# FIB_7: super().method_name()
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# class Animal:
+#     def __init__(self, name, sound):
+#         self.name = name; self.sound = sound
+#     def speak(self): print(f"{self.name}: {self.sound}")
+#     def __str__(self): return f"Animal({self.name})"
+#
+# class Dog(Animal):
+#     def speak(self): print(f"Dog {self.name}: Dog barks: {self.sound}")
+#     def fetch(self, ball): print(f"{self.name} fetches {ball}!")
+#
+# class Cat(Animal):
+#     def speak(self): print(f"Cat {self.name}: Cat meows: {self.sound}")
+#     def purr(self): print(f"{self.name} purrs... 😺")
+#
+# class GoldenRetriever(Dog):
+#     def __init__(self, name, sound, color):
+#         super().__init__(name, sound)
+#         self.color = color
+#     def speak(self): print(f"GoldenRetriever {self.name}: Dog barks: {self.sound} (color: {self.color})")
+#     def fetch(self, ball): print(f"{self.name} fetches {ball} with enthusiasm!")
+#
+# a = Animal("Crow","caw caw"); d = Dog("Rex","woof")
+# c = Cat("Whiskers","meow"); g = GoldenRetriever("Buddy","woof","Golden")
+# for animal in [a,d,c,g]: animal.speak()
+# g.fetch("tennis ball")
+# print(f"isinstance(g, Animal): {isinstance(g, Animal)}")
+# print(f"issubclass(GoldenRetriever, Animal): {issubclass(GoldenRetriever, Animal)}")
+# print("MRO:", [cls.__name__ for cls in GoldenRetriever.__mro__])
+

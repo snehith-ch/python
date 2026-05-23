@@ -262,6 +262,103 @@ for i in range(6):
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. def f(a, b, /, c): — which arguments are positional-only?
+#    A) All of them    B) Only c    C) a and b    D) b and c
+# Answer: ___
+
+# Q_MCQ_2. def f(a, *, b): — which is TRUE?
+#    A) b can be passed positionally      B) b MUST be passed as keyword
+#    C) a must be passed as keyword       D) Both a and b are keyword-only
+# Answer: ___
+
+# Q_MCQ_3. alias = my_function — what does alias refer to?
+#    A) A copy of the function    B) The same function object
+#    C) A new function            D) A backup that can't be called
+# Answer: ___
+
+# Q_MCQ_4. A recursive function MUST have:
+#    A) A return statement        B) A base case to stop recursion
+#    C) At least 2 parameters     D) A global variable
+# Answer: ___
+
+# Q_MCQ_5. factorial(5) using recursion = ?
+#    A) 25    B) 60    C) 120    D) 720
+# Answer: ___
+
+# Q_MCQ_6. An inner (nested) function can access variables from:
+#    A) Only its own local scope
+#    B) Its own scope AND the enclosing outer function's scope
+#    C) Only global scope
+#    D) Only built-in scope
+# Answer: ___
+
+# Q_MCQ_7. What does the / separator in def f(a, b, /, c) prevent?
+#    A) Passing too many arguments     B) Passing a and b as keyword arguments
+#    C) Passing c positionally         D) Calling the function with less than 3 args
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. def f(a, b, /, c, d): — a and b are _______ only;
+#         c and d can be positional OR _______.
+
+# FIB_2. def f(a, *, b, c): — b and c are _______ only.
+
+# FIB_3. square = power  creates an _______ — both names point to the
+#         _______ function object.
+
+# FIB_4. A recursive function calls _______.
+
+# FIB_5. Base case for factorial: factorial(0) = _______ and factorial(1) = _______.
+
+# FIB_6. Without a base case, recursion causes _______ error.
+
+# FIB_7. The inner function has access to the outer function's variables
+#         through the _______ scope (E in LEGB).
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Math Utility Library with all advanced function features.
+#
+# Requirements:
+#   1. power(base, exp, /) — POSITIONAL-ONLY, compute base**exp recursively
+#      Base case: exp==0 → return 1;  Recursive: base * power(base, exp-1)
+#   2. greet(*, name, greeting="Namaste") — KEYWORD-ONLY
+#      Prints: "{greeting}, {name}! Welcome to Python."
+#   3. make_multiplier(n) — returns a nested function multiply(x)
+#      that multiplies x by n (demonstrates closure)
+#   4. fibonacci(n) — recursive;  fib(0)=0, fib(1)=1, else fib(n-1)+fib(n-2)
+#   5. Create aliases:  square = power,  double = make_multiplier(2)
+#   6. Demonstrate:
+#      a) square(5, 2)  → 25  (using alias)
+#      b) double(7)     → 14  (using closure alias)
+#      c) greet(name="Snehith")  → uses default greeting
+#      d) fib sequence for n=0..7
+#      e) Try calling power(base=2, exp=3) → should raise TypeError
+#
+# Expected output (partial):
+#   power(3, 4)   = 81
+#   square(5, 2)  = 25
+#   double(7)     = 14
+#   greet → Namaste, Snehith! Welcome to Python.
+#   fib(7) = 13
+#   Fibonacci 0-7: [0,1,1,2,3,5,8,13]
+#   Calling power(base=2, exp=3) → TypeError (positional-only violated)
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -301,3 +398,50 @@ for i in range(6):
 # 3 6
 # 4 24
 # 5 120
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: C   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: B   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: positional;  keyword
+# FIB_2: keyword
+# FIB_3: alias;  same
+# FIB_4: itself
+# FIB_5: 1;  1
+# FIB_6: RecursionError (maximum recursion depth exceeded)
+# FIB_7: enclosing
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# def power(base, exp, /):
+#     if exp == 0: return 1
+#     return base * power(base, exp - 1)
+#
+# def greet(*, name, greeting="Namaste"):
+#     print(f"{greeting}, {name}! Welcome to Python.")
+#
+# def make_multiplier(n):
+#     def multiply(x):
+#         return x * n
+#     return multiply
+#
+# def fibonacci(n):
+#     if n <= 0: return 0
+#     if n == 1: return 1
+#     return fibonacci(n-1) + fibonacci(n-2)
+#
+# square = power
+# double = make_multiplier(2)
+#
+# print(f"power(3, 4)   = {power(3, 4)}")
+# print(f"square(5, 2)  = {square(5, 2)}")
+# print(f"double(7)     = {double(7)}")
+# greet(name="Snehith")
+# print(f"fib(7) = {fibonacci(7)}")
+# print(f"Fibonacci 0-7: {[fibonacci(i) for i in range(8)]}")
+# try:
+#     power(base=2, exp=3)
+# except TypeError as e:
+#     print(f"Calling power(base=2, exp=3) → TypeError: {e}")
+

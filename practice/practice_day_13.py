@@ -259,6 +259,98 @@ word = "mississippi"
 # YOUR CODE HERE:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What is the result of  {1, 2, 2, 3, 3, 3}?
+#    A) {1,2,2,3,3,3}    B) {1,2,3}    C) {3,2,1}    D) Error
+# Answer: ___
+
+# Q_MCQ_2. set.discard(x)  vs  set.remove(x) — when x is NOT in the set:
+#    A) Both raise KeyError
+#    B) discard() does nothing; remove() raises KeyError
+#    C) remove() does nothing; discard() raises KeyError
+#    D) Both do nothing silently
+# Answer: ___
+
+# Q_MCQ_3. dict.get("missing_key")  returns:
+#    A) Error    B) None    C) 0    D) False
+# Answer: ___
+
+# Q_MCQ_4. What does  {1,2,3} & {2,3,4}  produce?
+#    A) {1,2,3,4}    B) {2,3}    C) {1,4}    D) {1,2,3,2,3,4}
+# Answer: ___
+
+# Q_MCQ_5. Which method returns all key-value pairs of a dict?
+#    A) .keys()    B) .values()    C) .items()    D) .pairs()
+# Answer: ___
+
+# Q_MCQ_6. What does  {1,2,3} - {2,3,4}  return?
+#    A) {1}    B) {4}    C) {2,3}    D) {}
+# Answer: ___
+
+# Q_MCQ_7. dict.pop("key")  with a missing key:
+#    A) Returns None           B) Raises KeyError
+#    C) Returns False          D) Deletes the dict
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. To create an empty set: _______   (NOT {} which creates empty dict).
+
+# FIB_2. {1,2,3} | {3,4,5} = _______.  (union)
+
+# FIB_3. {1,2,3} ^ {2,3,4} = _______.  (symmetric difference)
+
+# FIB_4. dict.update({"a":1}) _______ key "a" if it exists or _______ it.
+
+# FIB_5. dict.keys() returns a _______ object (not a regular list).
+
+# FIB_6. {1,2,3}.issubset({1,2,3,4}) = _______.
+
+# FIB_7. dict.setdefault("key", 0) returns existing value if key exists,
+#         otherwise _______ the key with value 0 and returns _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Contact Book Application using dict and set.
+#
+# Requirements:
+#   1. Create a dict: name → phone number (5 contacts)
+#      e.g., {"Alice": "040-12345", "Bob": "080-67890", ...}
+#   2. Search a contact by name using get() — handle missing gracefully
+#   3. Add a new contact
+#   4. Update a phone number using update()
+#   5. Delete a contact using pop(), save the deleted number
+#   6. Print all contacts using items() in a formatted table
+#   7. Extract unique area codes (digits before '-') into a SET
+#   8. Use set intersection to find area codes shared between
+#      "group A" (first 3 contacts) and "group B" (last 3 contacts)
+#
+# Expected output:
+#   === Contact Book ===
+#   Alice        : 040-12345
+#   Bob          : 080-67890
+#   ...
+#   Search 'Alice': 040-12345
+#   Search 'Zara' : Contact not found
+#   Deleted: Bob (080-67890)
+#   Unique area codes: {'040', '080', '022'}
+#   Shared area codes (A∩B): {'040'}
+#
+# Hint: area_code = phone.split("-")[0]
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -287,3 +379,37 @@ word = "mississippi"
 # Q15: True, False (1234 is value not key), False, False
 
 # BONUS 3: {1,2,3,4}, {2,3}, {1}, {1,4}; 3, 0, True, False
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: C   Q_MCQ_6: A   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: set()
+# FIB_2: {1,2,3,4,5}
+# FIB_3: {1,4}
+# FIB_4: updates (overwrites);  adds
+# FIB_5: dict_keys
+# FIB_6: True
+# FIB_7: inserts;  0
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# contacts = {"Alice":"040-12345","Bob":"080-67890","Priya":"022-11111",
+#             "Raj":"040-99999","Meena":"080-55555"}
+# print("=== Contact Book ===")
+# for name, phone in contacts.items():
+#     print(f"{name:<12}: {phone}")
+# print(f"Search 'Alice': {contacts.get('Alice','Contact not found')}")
+# print(f"Search 'Zara' : {contacts.get('Zara','Contact not found')}")
+# contacts["Kiran"] = "011-33333"          # add
+# contacts.update({"Alice":"040-99999"})   # update
+# deleted = contacts.pop("Bob")
+# print(f"Deleted: Bob ({deleted})")
+# area_codes = {p.split('-')[0] for p in contacts.values()}
+# print(f"Unique area codes: {area_codes}")
+# keys = list(contacts.keys())
+# grp_a = {contacts[k].split('-')[0] for k in keys[:3]}
+# grp_b = {contacts[k].split('-')[0] for k in keys[-3:]}
+# print(f"Shared area codes (A∩B): {grp_a & grp_b}")
+

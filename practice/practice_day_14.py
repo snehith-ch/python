@@ -223,6 +223,94 @@ print(type(greet("test")))
 # Your full prediction:
 
 
+
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. What is the valid value range for elements in a  bytes  object?
+#    A) 0–127    B) 0–255    C) -128–127    D) Any integer
+# Answer: ___
+
+# Q_MCQ_2. Which is MUTABLE — bytes or bytearray?
+#    A) bytes    B) bytearray    C) Both    D) Neither
+# Answer: ___
+
+# Q_MCQ_3. What does  b"hello"[0]  return?
+#    A) 'h'    B) 104    C) b'h'    D) Error
+# Answer: ___
+
+# Q_MCQ_4. Why can a frozenset be used as a dict key but a regular set cannot?
+#    A) frozenset is smaller      B) frozenset is hashable (immutable);
+#       regular set is not        C) frozenset is a subclass of dict
+#    D) Regular sets can also be dict keys
+# Answer: ___
+
+# Q_MCQ_5. To convert a string "hello" to bytes (UTF-8 encoding):
+#    A) bytes("hello")        B) "hello".encode()
+#    C) b("hello")            D) bytes.from("hello")
+# Answer: ___
+
+# Q_MCQ_6. A function is DEFINED with the keyword _______ and CALLED with:
+#    A) def / ()     B) func / {}    C) def / []    D) define / ()
+# Answer: ___
+
+# Q_MCQ_7. What does bytearray([72, 101, 108, 108, 111]).decode() return?
+#    A) [72,101,108,108,111]    B) "Hello"
+#    C) b"Hello"                D) Error
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. bytes values must be in the range _______ to _______.
+
+# FIB_2. b"ABC"[0] = _______ (the ASCII value of 'A').
+
+# FIB_3. bytearray is like bytes but _______ (you can change individual bytes).
+
+# FIB_4. frozenset({1,2,3}) is _______, so it can be used as a _______ key.
+
+# FIB_5. "hello".encode() returns b'_______'.
+
+# FIB_6. A function runs only when it is _______.
+
+# FIB_7. def greet(): pass  → calling greet() returns _______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Simple Caesar Cipher using bytes and bytearray.
+# A Caesar cipher shifts each letter by a fixed number of positions.
+#
+# Requirements:
+#   1. Take a message string from input()
+#   2. Encode it to bytes using .encode()
+#   3. Create a bytearray from the bytes (so we can modify it)
+#   4. Shift each byte by +3 (wrapping A-Z: if > 90 for uppercase,
+#      subtract 26; if > 122 for lowercase, subtract 26)
+#      — skip non-letter bytes (spaces, digits, punctuation)
+#   5. Decode the bytearray back to a string = encrypted message
+#   6. Reverse the shift (-3) to decrypt and verify you get back original
+#   7. Use a frozenset of unique byte values as a dict key:
+#      {frozenset(encoded): "metadata about message"}
+#      Print the dict to show frozenset as key works
+#
+# Expected output (input: "Hello"):
+#   Original  : Hello
+#   Encrypted : Khoor
+#   Decrypted : Hello  ✓ matches original
+#   Stored with frozenset key: True
+#
+# Hint: For shifting, use:  (byte - 65 + 3) % 26 + 65  for uppercase letters.
+
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -256,3 +344,42 @@ print(type(greet("test")))
 # "HELLO, PYTHON!"
 # "Hello, World!"
 # <class 'str'>
+
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: B   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: A   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: 0;  255
+# FIB_2: 65
+# FIB_3: mutable
+# FIB_4: immutable (hashable);  dict
+# FIB_5: b'hello'
+# FIB_6: called  (invoked)
+# FIB_7: None
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# msg = input("Enter message: ")
+# encoded = msg.encode()
+# ba = bytearray(encoded)
+# # Encrypt (shift +3)
+# for i, b in enumerate(ba):
+#     if 65 <= b <= 90:    # uppercase
+#         ba[i] = (b - 65 + 3) % 26 + 65
+#     elif 97 <= b <= 122: # lowercase
+#         ba[i] = (b - 97 + 3) % 26 + 97
+# encrypted = ba.decode()
+# print(f"Original  : {msg}")
+# print(f"Encrypted : {encrypted}")
+# # Decrypt (shift -3)
+# ba2 = bytearray(encrypted.encode())
+# for i, b in enumerate(ba2):
+#     if 65 <= b <= 90:    ba2[i] = (b - 65 - 3) % 26 + 65
+#     elif 97 <= b <= 122: ba2[i] = (b - 97 - 3) % 26 + 97
+# decrypted = ba2.decode()
+# print(f"Decrypted : {decrypted}", "✓ matches original" if decrypted==msg else "✗ mismatch")
+# fs_key = frozenset(encoded)
+# store = {fs_key: "metadata about message"}
+# print(f"Stored with frozenset key: {fs_key in store}")
+

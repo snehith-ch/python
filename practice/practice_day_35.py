@@ -175,6 +175,89 @@ print(f"Total: {total_value}")     # prediction:
 # YOUR CODE HERE:
 
 
+
+# --------------------------------------------------
+# SECTION: MULTIPLE CHOICE QUESTIONS (MCQ)
+# --------------------------------------------------
+
+# Q_MCQ_1. Which module handles CSV files?
+#    A) json    B) csv    C) file    D) tabulate
+# Answer: ___
+
+# Q_MCQ_2. csv.reader() returns rows as:
+#    A) Dicts    B) Strings    C) Lists    D) Tuples
+# Answer: ___
+
+# Q_MCQ_3. csv.DictReader() returns each row as:
+#    A) A list    B) An OrderedDict / dict (keys from header row)
+#    C) A tuple    D) A string
+# Answer: ___
+
+# Q_MCQ_4. To add a new file to a ZIP without deleting existing files:
+#    A) zipfile.ZipFile("f.zip", "w")    B) zipfile.ZipFile("f.zip", "a")
+#    C) zipfile.ZipFile("f.zip", "r")    D) zipfile.ZipFile("f.zip", "x")
+# Answer: ___
+
+# Q_MCQ_5. zipfile.ZipFile.namelist()  returns:
+#    A) Number of files    B) List of file names in the archive
+#    C) File sizes    D) Compression method
+# Answer: ___
+
+# Q_MCQ_6. To write a CSV with a custom delimiter (e.g., |):
+#    A) csv.writer(f, delimiter="|")    B) csv.writer(f, sep="|")
+#    C) csv.writer(f, char="|")         D) Not possible
+# Answer: ___
+
+# Q_MCQ_7. zipfile.ZipFile(path, "r").extractall("dest_dir") extracts to:
+#    A) Current directory always    B) dest_dir
+#    C) A temp folder    D) The same folder as the zip
+# Answer: ___
+
+
+# --------------------------------------------------
+# SECTION: FILL IN THE BLANKS
+# --------------------------------------------------
+
+# FIB_1. import _______ to work with CSV files.
+
+# FIB_2. csv.writer(f).writerow([...]) writes a _______ to the CSV.
+
+# FIB_3. To read a CSV with headers as dict keys, use csv._______(f).
+
+# FIB_4. zipfile.ZipFile("data.zip", "_______") creates a new zip or
+#         overwrites existing.
+
+# FIB_5. zf.extractall("output/")  extracts _______ files from the archive.
+
+# FIB_6. The default delimiter in Python's csv module is _______.
+
+# FIB_7. To list all files inside a zip without extracting: zf._______.
+
+
+# --------------------------------------------------
+# REAL-WORLD TASK 🌍
+# --------------------------------------------------
+# Scenario: Student Records Manager — CSV + ZIP backup system.
+#
+# Requirements:
+#   1. Create "students.csv" with columns: Name, Age, Grade, Score
+#      Add at least 5 student rows
+#   2. Read the CSV using DictReader and calculate the average score
+#   3. Filter students with Score >= 75 and write them to "toppers.csv"
+#   4. Compress both CSV files into "records.zip" using zipfile
+#   5. List the contents of records.zip
+#   6. Extract records.zip into an "extracted/" folder
+#
+# Expected output:
+#   Created students.csv with 5 students.
+#   Average score: 78.4
+#   Toppers (score >= 75): 3 students → saved to toppers.csv
+#   records.zip contains: ['students.csv', 'toppers.csv']
+#   Extracted to extracted/
+#
+# YOUR CODE HERE:
+
+
 # ============================================================
 # SOLUTIONS
 # ============================================================
@@ -198,3 +281,51 @@ print(f"Total: {total_value}")     # prediction:
 # BONUS 1: "Apple: 500.0", "Banana: 500.0", "Mango: 400.0", "Total: 1400.0"
 
 # BONUS 2: a) True (file writes), b) True (extra blank lines), c) False (no error)
+
+# ── MCQ ANSWERS ──────────────────────────────────────────────────────────────
+# Q_MCQ_1: B   Q_MCQ_2: C   Q_MCQ_3: B   Q_MCQ_4: B
+# Q_MCQ_5: B   Q_MCQ_6: A   Q_MCQ_7: B
+
+# ── FILL IN THE BLANKS ANSWERS ───────────────────────────────────────────────
+# FIB_1: csv
+# FIB_2: single row (as a list)
+# FIB_3: DictReader
+# FIB_4: "w"
+# FIB_5: all
+# FIB_6: comma (,)
+# FIB_7: namelist()
+
+# ── REAL-WORLD TASK SOLUTION ─────────────────────────────────────────────────
+# import csv, zipfile, os
+#
+# students = [
+#     ["Name","Age","Grade","Score"],
+#     ["Alice","20","A","92"],
+#     ["Bob","21","B","78"],
+#     ["Carol","22","C","65"],
+#     ["David","20","A","88"],
+#     ["Eve","21","B","69"],
+# ]
+# with open("students.csv","w",newline="") as f:
+#     csv.writer(f).writerows(students)
+# print("Created students.csv with 5 students.")
+#
+# with open("students.csv","r") as f:
+#     rows = list(csv.DictReader(f))
+#
+# scores = [int(r["Score"]) for r in rows]
+# print(f"Average score: {sum(scores)/len(scores):.1f}")
+#
+# toppers = [r for r in rows if int(r["Score"]) >= 75]
+# with open("toppers.csv","w",newline="") as f:
+#     w = csv.DictWriter(f, fieldnames=rows[0].keys())
+#     w.writeheader(); w.writerows(toppers)
+# print(f"Toppers (score >= 75): {len(toppers)} students -> saved to toppers.csv")
+#
+# with zipfile.ZipFile("records.zip","w") as zf:
+#     zf.write("students.csv"); zf.write("toppers.csv")
+# with zipfile.ZipFile("records.zip","r") as zf:
+#     print(f"records.zip contains: {zf.namelist()}")
+#     zf.extractall("extracted/")
+# print("Extracted to extracted/")
+
